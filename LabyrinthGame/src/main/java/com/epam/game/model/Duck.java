@@ -8,7 +8,7 @@ import com.epam.game.behavior.Behavior;
 public class Duck {
 
 	private String name;
-	private Path route;
+	private Path path;
 	private List<Behavior> behaviors;
 
 	public Duck() {
@@ -29,11 +29,11 @@ public class Duck {
 	}
 
 	public Path getRoute() {
-		return route;
+		return path;
 	}
 
 	public void setRoute(Path route) {
-		this.route = route;
+		this.path = route;
 	}
 
 	public List<Behavior> getBehaviors() {
