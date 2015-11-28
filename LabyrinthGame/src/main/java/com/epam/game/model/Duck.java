@@ -32,8 +32,8 @@ public class Duck {
 		return path;
 	}
 
-	public void setRoute(Path route) {
-		this.path = route;
+	public void setRoute(Path path) {
+		this.path = path;
 	}
 
 	public List<Behavior> getBehaviors() {

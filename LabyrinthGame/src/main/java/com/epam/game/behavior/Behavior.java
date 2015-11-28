@@ -4,5 +4,5 @@ import com.epam.game.model.Labyrinth;
 
 public interface Behavior {
 
-	public void move(Labyrinth labyrinth , int [] coordinates);
+	void move(Labyrinth labyrinth , int [] coordinates);
 }

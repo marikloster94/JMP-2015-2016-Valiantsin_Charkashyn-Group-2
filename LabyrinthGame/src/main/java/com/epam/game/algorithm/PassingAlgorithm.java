@@ -4,5 +4,5 @@ import com.epam.game.model.Duck;
 import com.epam.game.model.Labyrinth;
 
 public interface PassingAlgorithm {
-	public void pass(Labyrinth labyrinth, int[] coordinates, Duck duck);
+	void pass(Labyrinth labyrinth, int[] coordinates, Duck duck);
 }

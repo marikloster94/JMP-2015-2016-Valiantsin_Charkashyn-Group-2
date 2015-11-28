@@ -4,5 +4,5 @@ import com.epam.game.model.Labyrinth;
 
 public interface Loader {
 
-	public Labyrinth load();
+	Labyrinth load();
 }
