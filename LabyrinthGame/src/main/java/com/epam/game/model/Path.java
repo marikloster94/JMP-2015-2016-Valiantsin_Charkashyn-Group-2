@@ -1,19 +1,19 @@
 package com.epam.game.model;
 
 public class Path {
-	private int routeNumber;
+	private String routeName;
 	private int routeTime;
 
 	public Path() {
 
 	}
 
-	public int getRouteNumber() {
-		return routeNumber;
+	public String getRouteName() {
+		return routeName;
 	}
 
-	public void setRouteNumber(int routeNumber) {
-		this.routeNumber = routeNumber;
+	public void setRouteName(String routeName) {
+		this.routeName = routeName;
 	}
 
 	public int getRouteTime() {

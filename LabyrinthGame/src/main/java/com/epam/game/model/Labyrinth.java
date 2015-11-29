@@ -1,25 +1,34 @@
 package com.epam.game.model;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
-public class Labyrinth {
+public class Labyrinth{
 
-	private List<String> square;
+	private String [][] square;
 	private HashMap<String, Integer[]> entrance; 
+	private Integer[] exit; 
 	
 	public Labyrinth() {
-		this.square = new ArrayList<String>();
+		
 	}
 
-	public List<String> getSquare() {
+	public Integer[] getExit() {
+		return exit;
+	}
+
+	public void setExit(Integer[] exit) {
+		this.exit = exit;
+	}
+
+	public String[][] getSquare() {
 		return square;
 	}
 
-	public void setSquare(List<String> square) {
+
+	public void setSquare(String[][] square) {
 		this.square = square;
 	}
+
 
 	public HashMap<String, Integer[]> getEntrance() {
 		return entrance;

@@ -1,8 +1,8 @@
 package com.epam.game.load;
 
-import com.epam.game.model.Labyrinth;
+import java.util.List;
 
 public interface Loader {
 
-	Labyrinth load();
+	List<String> load();
 }

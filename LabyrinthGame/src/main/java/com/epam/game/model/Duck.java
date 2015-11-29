@@ -10,14 +10,16 @@ public class Duck {
 	private String name;
 	private Path path;
 	private List<Behavior> behaviors;
+	private Orientation orientation;
 
 	public Duck() {
 		this.behaviors = new ArrayList<Behavior>();
 	}
 
-	public Duck(String name) {
+	public Duck(String name, List<Behavior> behaviors ) {
 		this.name = name;
-		this.behaviors = new ArrayList<Behavior>();
+		this.behaviors = behaviors;
+
 	}
 
 	public String getName() {
@@ -44,4 +46,28 @@ public class Duck {
 		this.behaviors = behaviors;
 	}
 
+	public Orientation getOrientation() {
+		return orientation;
+	}
+
+	public void setOrientation(Orientation orientation) {
+		this.orientation = orientation;
+	}
+
+	public List<Behavior> getBehaviorsByParam(Labyrinth labyrinth, int x, int y, Orientation orientation){
+		List<Behavior> matchingBehaviors = new ArrayList<Behavior>();
+		for(Behavior behavior:behaviors){
+			if(behavior.acceptWithHightestPriority(labyrinth, x, y, orientation)){
+				matchingBehaviors.add(behavior);
+			}
+		}
+		if(matchingBehaviors.isEmpty()){
+			for(Behavior behavior:behaviors){
+				if(behavior.acceptWithLowestPriority(labyrinth, x, y, orientation)){
+					matchingBehaviors.add(behavior);
+				}
+			}
+		}
+		return matchingBehaviors;
+	}
 }
