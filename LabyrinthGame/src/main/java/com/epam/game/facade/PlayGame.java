@@ -24,7 +24,7 @@ import com.epam.game.model.Path;
 
 public class PlayGame {
 
-	public Labyrinth loadLabyrinth() {
+	public Labyrinth loadLabyrinth() throws Exception {
 		Loader loader = new FileLoader();
 		List<String> inf = loader.load();
 		Labyrinth labyrinth = new Labyrinth();
@@ -53,16 +53,51 @@ public class PlayGame {
 		return labyrinth;
 	}
 
+	public void chekLabyrinth(Labyrinth labyrinth) {
+		
+		int lineLength = labyrinth.getSquare()[0].length;
+		for(int i=0; i<labyrinth.getSquare().length; i++){
+			if(lineLength!=labyrinth.getSquare()[i].length){
+				new RuntimeException("Labyrinth is loaded uncorrectly");
+			}
+		}
+		if (!"*".equals(labyrinth.getSquare()[0][0]) || !"*".equals(labyrinth.getSquare()[0][labyrinth.getSquare()[0].length-1])
+				|| !"*".equals(labyrinth.getSquare()[labyrinth.getSquare().length-1][0])
+				|| !"*".equals(labyrinth.getSquare()[labyrinth.getSquare().length-1][labyrinth.getSquare()[0].length-1])) {
+			new RuntimeException("Labyrinth is loaded uncorrectly");
+		}
+		for (int i = 0; i < labyrinth.getSquare().length; i++) {
+			if (!"*".equals(labyrinth.getSquare()[i][0]) || !"i".equals(labyrinth.getSquare()[i][0]) || !"e".equals(labyrinth.getSquare()[i][0])) {
+				new RuntimeException("Labyrinth is loaded uncorrectly");
+			}
+			int j = labyrinth.getSquare()[0].length-1;
+			if (!"*".equals(labyrinth.getSquare()[i][j]) || !"i".equals(labyrinth.getSquare()[i][j]) || !"e".equals(labyrinth.getSquare()[i][j])) {
+				new RuntimeException("Labyrinth is loaded uncorrectly");
+			}
+		}
+		for (int j = 0; j < labyrinth.getSquare()[0].length; j++) {
+			if (!"*".equals(labyrinth.getSquare()[0][j]) || !"i".equals(labyrinth.getSquare()[0][j]) || !"e".equals(labyrinth.getSquare()[0][j])) {
+				new RuntimeException("Labyrinth is loaded uncorrectly");
+			}
+			int i = labyrinth.getSquare()[0].length-1;
+			if (!"*".equals(labyrinth.getSquare()[i][j]) || !"i".equals(labyrinth.getSquare()[i][j]) || !"e".equals(labyrinth.getSquare()[i][j])) {
+				new RuntimeException("Labyrinth is loaded uncorrectly");
+			}
+		}
+		
+	}
+
 	public List<Behavior> loadDuckBehaviors() {
 		List<Behavior> behaviors = new ArrayList<Behavior>();
-		behaviors.add(new WalkOnBehavior());
 		behaviors.add(new TurnLeftBehavior());
 		behaviors.add(new TurnRightBehavior());
 		behaviors.add(new GoBackBehavior());
+		behaviors.add(new WalkOnBehavior());
 		return behaviors;
 	}
 
 	public List<Duck> loadDucks(List<Behavior> behaviors) {
+		Collections.shuffle(behaviors);
 		List<Duck> ducks = new ArrayList<Duck>();
 		ducks.add(new Duck("Helda", behaviors));
 		ducks.add(new Duck("Lara", behaviors));
@@ -84,8 +119,11 @@ public class PlayGame {
 			String routeName = (String) labyrinth.getEntrance().keySet().toArray()[i];
 			path.setRouteName(routeName);
 			Integer[] coordinates = labyrinth.getEntrance().get(routeName);
-			// проверка на exception (null не может быть)
-			duck.setOrientation(getOrientation(coordinates[0], coordinates[1], labyrinth));
+			Orientation startOrientation = getOrientation(coordinates[0], coordinates[1], labyrinth);
+			if (startOrientation == null) {
+				throw new RuntimeException("Duck doesn'r stay at the start");
+			}
+			duck.setOrientation(startOrientation);
 			duck.setRoute(path);
 			i++;
 		}
@@ -107,16 +145,17 @@ public class PlayGame {
 		return null;
 	}
 
-	public void playGame(Labyrinth labyrinth, List<Duck> ducks, List<PassingAlgorithm> algs) {
+	public void playGame(Labyrinth labyrinth, List<Duck> ducks, List<PassingAlgorithm> algs) throws Exception {
 		Collections.shuffle(algs);
 		int index = 0;
 		for (Duck duck : ducks) {
 			PassingAlgorithm alg = algs.get(index);
-			System.out.println("Duck with name " + duck.getName() + " chooses passing algorithm "+alg.getClass().getSimpleName() + "  begins play on path " + duck.getRoute().getRouteName());
+			System.out.println("Duck " + duck.getName() + " chooses passing algorithm " + alg.getClass().getSimpleName() + " and begins play on path "
+					+ duck.getRoute().getRouteName());
 			Labyrinth localLabyrinth = loadLabyrinth();
 			alg.pass(localLabyrinth, duck);
-			System.out.println("Duck with name " + duck.getName() + " pass labyrinth after " + duck.getRoute().getRouteTime() + " steps");
-			printPath(localLabyrinth);
+			System.out.println("Duck " + duck.getName() + " pass labyrinth after " + duck.getRoute().getRouteTime() + " steps");
+			// printPath(localLabyrinth);
 			index++;
 		}
 	}
@@ -130,14 +169,14 @@ public class PlayGame {
 		System.out.println("Path:");
 		for (int i = 0; i < labyrinth.getSquare().length; i++) {
 			for (int j = 0; j < labyrinth.getSquare()[i].length; j++) {
-				if(labyrinth.getSquare()[i][j].length()==1){
+				if (labyrinth.getSquare()[i][j].length() == 1) {
 					System.out.print(labyrinth.getSquare()[i][j] + " ");
-				}else{
+				} else {
 					System.out.print(labyrinth.getSquare()[i][j]);
 				}
 				System.out.print(" ");
 			}
-			System.out.print("\n");
+			System.out.println();
 		}
 	}
 }

@@ -57,7 +57,6 @@ public class TurnRightBehavior implements Behavior {
 		return false;
 	}
 
-	@Override
 	public boolean acceptWithLowestPriority(Labyrinth labyrinth, int x, int y, Orientation orientation) {
 		switch (orientation) {
 		case RIGHT:

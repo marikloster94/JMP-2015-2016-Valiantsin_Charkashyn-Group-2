@@ -24,6 +24,8 @@ public class RightHandAlgorithm implements PassingAlgorithm {
 				x = coordinates[0];
 				y = coordinates[1];
 				pathLenght++;
+			}else{
+				throw new RuntimeException("Duck losted and died at labyrinth");
 			}
 		}
 		duck.getRoute().setRouteTime(pathLenght);

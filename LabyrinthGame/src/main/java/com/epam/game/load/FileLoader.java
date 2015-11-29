@@ -10,11 +10,10 @@ import java.util.List;
 
 public class FileLoader implements Loader {
 
-	public List<String> load() {
+	public List<String> load() throws Exception {
 		String file ="src/resources/labyrinth.txt";        
 		List<String> inf = new ArrayList<String>();
 		BufferedReader br=null;
-	    //reading   
 	    try{
 	        InputStream ips=new FileInputStream(file); 
 	        InputStreamReader ipsr=new InputStreamReader(ips);
@@ -25,7 +24,7 @@ public class FileLoader implements Loader {
 	        }
 	    }       
 	    catch (Exception e){
-	        System.out.println(e.toString());
+	        throw e; 
 	    } finally{
 	    	if(br!=null){
 	    		try {

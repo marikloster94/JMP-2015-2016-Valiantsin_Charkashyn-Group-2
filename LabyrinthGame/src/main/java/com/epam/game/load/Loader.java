@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface Loader {
 
-	List<String> load();
+	List<String> load() throws Exception;
 }
