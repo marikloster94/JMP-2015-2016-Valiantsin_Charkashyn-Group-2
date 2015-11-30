@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import com.epam.game.algorithm.LeftHandAlgorithm;
 import com.epam.game.algorithm.PassingAlgorithm;
@@ -145,27 +146,24 @@ public class PlayGame {
 		return null;
 	}
 
-	public void playGame(Labyrinth labyrinth, List<Duck> ducks, List<PassingAlgorithm> algs) throws Exception {
+	public void playGame(Labyrinth labyrinth, Duck duck, List<PassingAlgorithm> algs) throws Exception {
 		Collections.shuffle(algs);
-		int index = 0;
-		for (Duck duck : ducks) {
-			PassingAlgorithm alg = algs.get(index);
-			System.out.println("Duck " + duck.getName() + " chooses passing algorithm " + alg.getClass().getSimpleName() + " and begins play on path "
+		int index = new Random().nextInt(algs.size());
+		PassingAlgorithm alg = algs.get(index);
+		System.out.println("Duck " + duck.getName() + " chooses passing algorithm " + alg.getClass().getSimpleName() + " and begins play on path "
 					+ duck.getRoute().getRouteName());
-			Labyrinth localLabyrinth = loadLabyrinth();
-			alg.pass(localLabyrinth, duck);
-			System.out.println("Duck " + duck.getName() + " pass labyrinth after " + duck.getRoute().getRouteTime() + " steps");
-			// printPath(localLabyrinth);
-			index++;
-		}
+		alg.pass(labyrinth, duck);
+		System.out.println("Duck " + duck.getName() + " pass labyrinth after " + duck.getRoute().getRouteTime() + " steps");
+		
 	}
+
 
 	public Duck determineWinner(List<Duck> ducks) {
 		Collections.sort(ducks, new DuckComparator());
 		return ducks.get(0);
 	}
 
-	private void printPath(Labyrinth labyrinth) {
+	public void showRoute(Labyrinth labyrinth) {
 		System.out.println("Path:");
 		for (int i = 0; i < labyrinth.getSquare().length; i++) {
 			for (int j = 0; j < labyrinth.getSquare()[i].length; j++) {

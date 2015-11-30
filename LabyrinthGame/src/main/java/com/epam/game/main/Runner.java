@@ -28,7 +28,11 @@ public class Runner {
 			System.out.println("Choose enterance for duck");
 			player.chooseStartCoordinates(ducks, labyrinth);
 			System.out.println("Enterance choosed");
-			player.playGame(labyrinth, ducks, player.loadPassingAlgorithms());
+			for(Duck duck:ducks){
+				labyrinth = player.loadLabyrinth();
+				player.playGame(labyrinth, duck, player.loadPassingAlgorithms());
+				player.showRoute(labyrinth);
+			}
 			Duck winner = player.determineWinner(ducks);
 			System.out.println("The winner is " + winner.getName() + ".Winner exit from labyrinth after " + winner.getRoute().getRouteTime() + " steps");
 		} catch (FileNotFoundException ex) {

@@ -12,13 +12,11 @@
 
 	<build>
 		<resources>
-			<!-- resource processsing with a different output directory for labyrinth.txt -->
 			<resource>
 				<directory>src/resources</directory>
 				<includes>
 					<include>labyrinth.txt</include>
 				</includes>
-
 			</resource>
 		</resources>
 		<pluginManagement>
