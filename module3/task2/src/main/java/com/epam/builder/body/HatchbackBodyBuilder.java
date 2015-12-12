@@ -1,7 +1,7 @@
 package com.epam.builder.body;
 
 
-public class HatchbackBoduBuilder extends BodyBuilder {
+public class HatchbackBodyBuilder extends BodyBuilder {
 
 	@Override
 	public void buildColor() {

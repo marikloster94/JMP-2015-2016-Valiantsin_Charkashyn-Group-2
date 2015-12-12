@@ -12,6 +12,7 @@ import com.epam.entity.Car;
 import com.epam.entity.Headlight;
 import com.epam.entity.Weel;
 
+@Deprecated
 public class CarClassBuilder {
 	private Car car;
 

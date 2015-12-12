@@ -10,17 +10,23 @@ public class CarDirector {
 		this.carBuilder = carBuilder;
 	}
 
-	public void constructCar() {
+	public CarBuilder constructCar() {
 		carBuilder.buildCar();
 		carBuilder.buildCarBody();
 		carBuilder.buildEngine();
 		carBuilder.buildTransmission();
-		carBuilder.buildHeadlights();
+		for (int i = 0; i < 2; i++) {
+			carBuilder.buildFrontHeadlights();
+		}
+		for (int i = 0; i < 2; i++) {
+			carBuilder.buildBackHeadlights();
+		}
 		carBuilder.buildInterior();
-		for(int i=0; i<4; i++){
+		for (int i = 0; i < 4; i++) {
 			carBuilder.buildWeels();
 		}
-		
+		return carBuilder;
+
 	}
 
 	public Car getCar() {

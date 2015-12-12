@@ -28,7 +28,7 @@
 
 					<archive>
 						<manifest>
-							<mainClass>com.epam.main.Runner</mainClass>
+							<mainClass>com.epam.main.runner.Runner</mainClass>
 						</manifest>
 					</archive>
 				</configuration>

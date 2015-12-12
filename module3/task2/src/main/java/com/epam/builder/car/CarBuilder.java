@@ -17,6 +17,7 @@ public abstract class CarBuilder {
 	public abstract void buildEngine();
 	public abstract void buildInterior();
 	public abstract void buildTransmission();
-	public abstract void buildHeadlights();
+	public abstract void buildFrontHeadlights();
+	public abstract void buildBackHeadlights();
 	public abstract void buildWeels();
 }
