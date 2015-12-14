@@ -4,9 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import com.epam.facade.ResourceFacade;
 import com.epam.model.DatabaseResource;
 import com.epam.model.Resource;
-import com.epam.property.PropertyReader;
 
 public class DatabaseFactory extends ResourceFactory {
 
@@ -16,10 +16,10 @@ public class DatabaseFactory extends ResourceFactory {
 
 	@Override
 	public Resource createResource() {
-		String driver = PropertyReader.readFromProperty("database.driver_class");
-		String url = PropertyReader.readFromProperty("database.url");
-		String userName = PropertyReader.readFromProperty("database.username");
-		String password = PropertyReader.readFromProperty("database.password");
+		String driver = ResourceFacade.readFromProperty("database.driver_class");
+		String url = ResourceFacade.readFromProperty("database.url");
+		String userName = ResourceFacade.readFromProperty("database.username");
+		String password = ResourceFacade.readFromProperty("database.password");
 		if (driver != null && url != null && userName != null && password != null) {
 			try {
 				Class.forName(driver).newInstance();
@@ -36,7 +36,7 @@ public class DatabaseFactory extends ResourceFactory {
 				ex.printStackTrace();
 			}
 		}
-		return resource;
+		return (DatabaseResource) resource;
 	}
 
 }

@@ -4,21 +4,17 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.List;
 
+import com.epam.dao.JDBCResourceDAO;
+import com.epam.dao.ResourceDAO;
 import com.epam.model.DatabaseResource;
 import com.epam.model.Person;
 
 public class DatabaseFactoryMethod extends ResourceFactoryMethod {
 
-	static final String WRITE_OBJECT_SQL = "INSERT INTO java_objects(object_name, object_value) VALUES (?, ?)";
-
-	static final String READ_OBJECT_SQL = "SELECT object_value FROM java_objects WHERE object_id = ?";
-
-	static final String READ_ALL_OBJECT_SQL = "SELECT object_value FROM java_objects";
+	private final ResourceDAO dao = new JDBCResourceDAO();
 
 	public DatabaseFactoryMethod() {
 		resource = new DatabaseResource();
@@ -28,14 +24,9 @@ public class DatabaseFactoryMethod extends ResourceFactoryMethod {
 	public void writePerson(Person person) {
 		Connection connection = ((DatabaseResource) resource).getConnection();
 		try {
-			String className = person.getClass().getName();
-			PreparedStatement pstmt = connection.prepareStatement(WRITE_OBJECT_SQL, Statement.RETURN_GENERATED_KEYS);
-			pstmt.setString(1, className);
-			pstmt.setObject(2, person);
-			pstmt.executeUpdate();
-			pstmt.close();
-		} catch (SQLException ex) {
-			ex.printStackTrace();
+			dao.addPerson(connection, person);
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 
 	}
@@ -43,19 +34,12 @@ public class DatabaseFactoryMethod extends ResourceFactoryMethod {
 	@Override
 	public Person readPerson() {
 		Connection connection = ((DatabaseResource) resource).getConnection();
-		PreparedStatement pstmt;
 		Person person = null;
 		try {
-			pstmt = connection.prepareStatement(READ_OBJECT_SQL);
-			pstmt.setLong(1, 1);
-			ResultSet rs = pstmt.executeQuery();
-			rs.next();
-			byte[] st = (byte[]) rs.getObject(1);
+			byte[] st = dao.getFirstPerson(connection);
 			ByteArrayInputStream baip = new ByteArrayInputStream(st);
 			ObjectInputStream ois = new ObjectInputStream(baip);
 			person = (Person) ois.readObject();
-			rs.close();
-			pstmt.close();
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		} catch (IOException ex) {
@@ -70,22 +54,17 @@ public class DatabaseFactoryMethod extends ResourceFactoryMethod {
 	@Override
 	public Person readPerson(String name) {
 		Connection connection = ((DatabaseResource) resource).getConnection();
-		PreparedStatement pstmt;
 		Person person = null;
 		try {
-			pstmt = connection.prepareStatement(READ_ALL_OBJECT_SQL);
-			ResultSet rs = pstmt.executeQuery();
-			while (rs.next()) {
-				byte[] st = (byte[]) rs.getObject(1);
+			List<byte[]> list = dao.getPersons(connection);
+			for(byte[] st: list ) {
 				ByteArrayInputStream baip = new ByteArrayInputStream(st);
 				ObjectInputStream ois = new ObjectInputStream(baip);
 				person = (Person) ois.readObject();
-				if(person.getName().equals(name)){
+				if(name.equals(person.getName())){
 					return person;
 				}
 			}
-			rs.close();
-			pstmt.close();
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		} catch (IOException ex) {
