@@ -5,8 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.epam.model.FileResource;
 import com.epam.model.Person;
@@ -47,29 +45,29 @@ public class FileFactoryMethod extends ResourceFactoryMethod {
 	}
 
 	public Person readPerson(String name) {
-		Person obj = null;
-		Object tempObj = null;
-		List<Person> persons = new ArrayList<Person>();
-		try {
-			FileInputStream fileIn = new FileInputStream(((FileResource) resource).getFile().getAbsolutePath());
-			ObjectInputStream objectIn = new ObjectInputStream(fileIn);
-			while ((tempObj = objectIn.readObject()) != null) {
-			    if (tempObj instanceof Person) {
-			    	obj = (Person)tempObj;
-			    	persons.add(obj);
-			    }
-			}
-			for(Person person:persons){
-				if(person.getName().equals(name)){
-					return person;
-				}
-			}
-			objectIn.close();
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		} catch (ClassNotFoundException ex) {
-			ex.printStackTrace();
-		}
+//		Person obj = null;
+//		Object tempObj = null;
+//		List<Person> persons = new ArrayList<Person>();
+//		try {
+//			FileInputStream fileIn = new FileInputStream(((FileResource) resource).getFile().getAbsolutePath());
+//			ObjectInputStream objectIn = new ObjectInputStream(fileIn);
+//			while ((tempObj = objectIn.readObject()) != null) {
+//			    if (tempObj instanceof Person) {
+//			    	obj = (Person)tempObj;
+//			    	persons.add(obj);
+//			    }
+//			}
+//			for(Person person:persons){
+//				if(person.getName().equals(name)){
+//					return person;
+//				}
+//			}
+//			objectIn.close();
+//		} catch (IOException ex) {
+//			ex.printStackTrace();
+//		} catch (ClassNotFoundException ex) {
+//			ex.printStackTrace();
+//		}
 		return null;
 	}
 
