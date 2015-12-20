@@ -31,16 +31,16 @@ public class Runner {
 	
 	public static List<Car> createList(){
 		List<Car> cars = new ArrayList<Car>();
-		Car car = new Car();
-		car.setCarType("sedan");
-		car.setMark("MAZDA");
-		car.setAge(2);
-		Car car1 = new Car();
-		car1.setCarType("sedan");
-		car1.setMark("FORD");
-		car1.setAge(4);
-		cars.add(car1);
-		cars.add(car);
+		Car mazda = new Car();
+		mazda.setCarType("sedan");
+		mazda.setMark("MAZDA");
+		mazda.setAge(2);
+		Car ford = new Car();
+		ford.setCarType("sedan");
+		ford.setMark("FORD");
+		ford.setAge(4);
+		cars.add(ford);
+		cars.add(mazda);
 		return cars;
 	}
 
