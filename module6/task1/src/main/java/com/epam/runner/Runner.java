@@ -10,11 +10,11 @@ public class Runner {
 
 	public static void main(String[] args) {
 		List<Memory> list = new ArrayList<Memory>();
-		while(true){
-			System.out.println(list.size());
+		for(int i = 0 ; i <150; i++){
 			list.add(new Memory(512, "heap", "young"));
 			MemoryManagement.takeMemory(new Memory(128, "heap", "young"));
 		}
+		System.out.println("Created "+ list.size()+ " objects");
 	}
 
 }
