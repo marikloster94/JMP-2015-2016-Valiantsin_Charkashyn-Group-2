@@ -18,11 +18,13 @@ public class Producer implements Runnable {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-
-			int message = new Random().nextInt(150);
-			data.add(message);
-			System.out.println("Producer add message " + message);
-
+			synchronized (data){
+				int message = new Random().nextInt(150);
+				data.add(message);
+				data.notify();
+				System.out.println("Producer add message " + message);
+				
+			}
 		}
 	}
 

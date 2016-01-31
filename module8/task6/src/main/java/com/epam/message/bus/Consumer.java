@@ -19,11 +19,14 @@ public class Consumer implements Runnable {
 				e.printStackTrace();
 			}
 			synchronized (data) {
-				if (!data.isEmpty()) {
-					System.out.println("Consumer get: "	+ data.get(data.size() - 1));
-				} else {
-					System.out.println("Consumer can not get data. List is empty");
+				try{
+					while(data.isEmpty()){
+						data.wait();
+					}
+				}catch(InterruptedException ex){
+					System.out.println(ex.getMessage());
 				}
+				System.out.println("Consumer get: "	+ data.get(data.size() - 1));
 
 			}
 		}
