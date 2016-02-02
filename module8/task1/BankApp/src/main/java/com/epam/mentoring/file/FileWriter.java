@@ -1,5 +1,6 @@
 package com.epam.mentoring.file;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -22,7 +23,7 @@ public class FileWriter implements Writer {
 		try {
 			lock.lock();
 			URL ips = ClassLoader.getSystemResource(filename);
-			FileOutputStream fos = new FileOutputStream(ips.getFile());
+			FileOutputStream fos = new FileOutputStream(ips.getFile(), true);
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(data);
 		} catch (Exception e) {
