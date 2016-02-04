@@ -1,12 +1,18 @@
-package com.epam.mentoring.model;
+package com.epam.mentoring.jaxb.model;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class Account implements Serializable {
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
-	private static final long serialVersionUID = 4117534837435126228L;
+import com.epam.mentoring.model.Currency;
+import com.epam.mentoring.model.Person;
 
+@XmlRootElement(name = "account")
+@XmlAccessorType (XmlAccessType.FIELD)
+public class Account {
+	
 	private int id;
 	private String description;
 	private String startdDate;
@@ -118,5 +124,4 @@ public class Account implements Serializable {
 			return false;
 		return true;
 	}
-
 }

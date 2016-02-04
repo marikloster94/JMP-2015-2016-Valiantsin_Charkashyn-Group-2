@@ -1,9 +1,7 @@
 package com.epam.mentoring.file;
 
-import java.util.List;
-
 import com.epam.mentoring.exception.FileException;
 
 public interface Writer {
-	void write(String filename, List data) throws FileException;
+	void write(String filename, Object data, Class<?> className) throws FileException;
 }

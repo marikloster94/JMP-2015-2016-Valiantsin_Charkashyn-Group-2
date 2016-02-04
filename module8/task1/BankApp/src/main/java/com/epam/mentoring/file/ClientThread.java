@@ -11,10 +11,19 @@ public class ClientThread implements Runnable {
 	private Logger log = Logger.getLogger(FileGenerator.class);
 
 	private String fileName;
-	private List data;
+	private Object data;
+	private Class<?> className;
 	
 	public ClientThread(String fileName){
 		this.fileName = fileName;
+	}
+	
+	public Class<?> getClassName() {
+		return className;
+	}
+
+	public void setClassName(Class<?> className) {
+		this.className = className;
 	}
 	
 	public String getFileName() {
@@ -25,11 +34,11 @@ public class ClientThread implements Runnable {
 		this.fileName = fileName;
 	}
 
-	public List getData() {
+	public Object getData() {
 		return data;
 	}
 
-	public void setData(List data) {
+	public void setData(Object data) {
 		this.data = data;
 	}
 
@@ -37,7 +46,7 @@ public class ClientThread implements Runnable {
 	public void run() {
 		try {
 			Loader load = new FileLoader();
-			setData(load.load(fileName));
+			setData(load.load(fileName, className));
 		} catch (FileException e) {
 			log.error(ClientThread.class, e);
 		} 

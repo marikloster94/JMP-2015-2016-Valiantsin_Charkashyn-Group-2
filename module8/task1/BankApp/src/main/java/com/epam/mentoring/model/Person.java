@@ -1,17 +1,25 @@
 package com.epam.mentoring.model;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
 
 public class Person implements Serializable {
 
 	private static final long serialVersionUID = -5726861894518363775L;
 	private String name;
 	private String surname;
-	private Date dateOfBirth;
-	private List<Account> accounts;
+	private String dateOfBirth;
+	private String passportNumber;
 
+	public Person(){
+		
+	}
+	public Person(String name, String surname, String date){
+		this.name = name;
+		this.surname = surname;
+		this.dateOfBirth = date;
+		
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -28,22 +36,20 @@ public class Person implements Serializable {
 		this.surname = surname;
 	}
 
-	public Date getDateOfBirth() {
+	public String getDateOfBirth() {
 		return dateOfBirth;
 	}
 
-	public void setDateOfBirth(Date dateOfBirth) {
+	public void setDateOfBirth(String dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 
-	public List<Account> getAccounts() {
-		return accounts;
+	public String getPassportNumber() {
+		return passportNumber;
 	}
-
-	public void setAccounts(List<Account> accounts) {
-		this.accounts = accounts;
+	public void setPassportNumber(String passportNumber) {
+		this.passportNumber = passportNumber;
 	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;

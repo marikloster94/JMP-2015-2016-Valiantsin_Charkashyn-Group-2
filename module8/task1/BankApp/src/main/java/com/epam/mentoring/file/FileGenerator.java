@@ -1,9 +1,5 @@
 package com.epam.mentoring.file;
 
-import java.util.List;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-
 import org.apache.log4j.Logger;
 
 import com.epam.mentoring.exception.FileException;
@@ -13,12 +9,20 @@ public class FileGenerator implements Runnable {
 	private Logger log = Logger.getLogger(FileGenerator.class);
 
 	private String fileName;
-	private List data;
+	private Object data;
+	private Class<?> className;
 	
-
-	public FileGenerator(String fileName, List data) {
+	public FileGenerator(String fileName, Object data) {
 		this.fileName = fileName;
 		this.data = data;
+	}
+	
+	public Class<?> getClassName() {
+		return className;
+	}
+
+	public void setClassName(Class<?> className) {
+		this.className = className;
 	}
 
 	public String getFileName() {
@@ -29,21 +33,21 @@ public class FileGenerator implements Runnable {
 		this.fileName = fileName;
 	}
 
-	public List getData() {
+	public Object getData() {
 		return data;
 	}
 
-	public void setData(List data) {
+	public void setData(Object data) {
 		this.data = data;
 	}
 
 	public void run() {
 		try {
 			Writer write = new FileWriter();
-			write.write(fileName, data);
+			write.write(fileName, data, className);
 		} catch (FileException e) {
 			log.error(FileGenerator.class, e);
-		} 
+		}
 	}
 
 }

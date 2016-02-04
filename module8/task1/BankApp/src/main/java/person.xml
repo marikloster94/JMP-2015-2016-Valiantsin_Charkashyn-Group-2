@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<clients>
+	<person>
+		<name>Петр</name>
+		<surname>Федоров</surname>
+		<dateOfBirth>12/03/1985</dateOfBirth>
+		<passportNumber>MC2345643</passportNumber>
+	</person>
+	<person>
+		<name>Иван</name>
+		<surname>Петров</surname>
+		<dateOfBirth>12/03/1990</dateOfBirth>
+		<passportNumber>KJ2445723</passportNumber>
+	</person>
+</clients>

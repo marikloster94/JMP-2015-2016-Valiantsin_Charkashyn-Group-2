@@ -8,7 +8,7 @@ public class Currency implements Serializable {
 
 	private int idCurrency;
 	private String shortName;
-	private double rate;
+	
 	public int getIdCurrency() {
 		return idCurrency;
 	}
@@ -21,20 +21,12 @@ public class Currency implements Serializable {
 	public void setShortName(String shortName) {
 		this.shortName = shortName;
 	}
-	public double getRate() {
-		return rate;
-	}
-	public void setRate(double rate) {
-		this.rate = rate;
-	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + idCurrency;
-		long temp;
-		temp = Double.doubleToLongBits(rate);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result
 				+ ((shortName == null) ? 0 : shortName.hashCode());
 		return result;
@@ -49,9 +41,6 @@ public class Currency implements Serializable {
 			return false;
 		Currency other = (Currency) obj;
 		if (idCurrency != other.idCurrency)
-			return false;
-		if (Double.doubleToLongBits(rate) != Double
-				.doubleToLongBits(other.rate))
 			return false;
 		if (shortName == null) {
 			if (other.shortName != null)
