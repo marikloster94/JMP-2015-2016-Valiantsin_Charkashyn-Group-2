@@ -27,6 +27,11 @@
 				<directory>src/resources</directory>
 				<includes>
 					<include>log4j.properties</include>
+					<include>account.xml</include>
+					<include>currency.xml</include>
+					<include>exchangeRate.xml</include>
+					<include>exchangeTicket.xml</include>
+					<include>person.xml</include>
 				</includes>
 			</resource>
 		</resources>
@@ -59,6 +64,14 @@
 						<manifest>
 							<mainClass>com.epam.main.Runner</mainClass>
 						</manifest>
+						<manifestEntries>
+							<Class-Path>./classes/log4j.properties</Class-Path>
+							<Class-Path>./classes/account.xml</Class-Path>
+							<Class-Path>./classes/currency.xml</Class-Path>
+							<Class-Path>./classes/exchangeRate.xml</Class-Path>
+							<Class-Path>./classes/exchangeTicket.xml</Class-Path>
+							<Class-Path>./classes/person.xml</Class-Path>
+						</manifestEntries>
 					</archive>
 					<descriptorRefs>
 						<descriptorRef>jar-with-dependencies</descriptorRef>

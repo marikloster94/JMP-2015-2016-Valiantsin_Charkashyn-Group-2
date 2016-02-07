@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<accounts>
+    <account>
+        <curr>
+            <idCurrency>1</idCurrency>
+            <shortName>USD</shortName>
+        </curr>
+        <description>Депозит в долларах</description>
+        <endDate>12/12/2016</endDate>
+        <id>1</id>
+        <person>
+            <dateOfBirth>12/03/1985</dateOfBirth>
+            <name>Петр</name>
+            <passportNumber>MC2345643</passportNumber>
+            <surname>Федоров</surname>
+        </person>
+        <value>1550.55</value>
+    </account>
+    <account>
+        <curr>
+            <idCurrency>3</idCurrency>
+            <shortName>BYR</shortName>
+        </curr>
+        <description>Доступные белорусские рубли для обмена (банковский)</description>
+        <endDate>12/12/2019</endDate>
+        <id>6</id>
+        <person>
+            <dateOfBirth>12/05/1970</dateOfBirth>
+            <name>Виктор</name>
+            <passportNumber>MC2467923</passportNumber>
+            <surname>Назаров</surname>
+        </person>
+        <value>2.5E10</value>
+    </account>
+    <account>
+        <curr>
+            <idCurrency>2</idCurrency>
+            <shortName>EUR</shortName>
+        </curr>
+        <description>Депозит в евро</description>
+        <endDate>12/12/2016</endDate>
+        <id>2</id>
+        <person>
+            <dateOfBirth>17/02/1994</dateOfBirth>
+            <name>Мария</name>
+            <passportNumber>MC2108064</passportNumber>
+            <surname>Клостер</surname>
+        </person>
+        <value>3000.56</value>
+    </account>
+    <account>
+        <curr>
+            <idCurrency>2</idCurrency>
+            <shortName>EUR</shortName>
+        </curr>
+        <description>Доступное евро для обмена (банковский)</description>
+        <endDate>12/12/2016</endDate>
+        <id>4</id>
+        <person>
+            <dateOfBirth>12/05/1970</dateOfBirth>
+            <name>Виктор</name>
+            <passportNumber>MC2467923</passportNumber>
+            <surname>Назаров</surname>
+        </person>
+        <value>9600.56</value>
+    </account>
+    <account>
+        <curr>
+            <idCurrency>1</idCurrency>
+            <shortName>USD</shortName>
+        </curr>
+        <description>Доступные доллары для обмена (банковский)</description>
+        <endDate>12/12/2019</endDate>
+        <id>5</id>
+        <person>
+            <dateOfBirth>12/05/1970</dateOfBirth>
+            <name>Виктор</name>
+            <passportNumber>MC2467923</passportNumber>
+            <surname>Назаров</surname>
+        </person>
+        <value>24940.0</value>
+    </account>
+    <account>
+        <curr>
+            <idCurrency>2</idCurrency>
+            <shortName>EUR</shortName>
+        </curr>
+        <description>Депозит в евро</description>
+        <endDate>01/08/2016</endDate>
+        <id>3</id>
+        <person>
+            <dateOfBirth>12/03/1985</dateOfBirth>
+            <name>Петр</name>
+            <passportNumber>MC2345643</passportNumber>
+            <surname>Федоров</surname>
+        </person>
+        <value>1133.9599999999998</value>
+    </account>
+    <account>
+        <curr>
+            <idCurrency>3</idCurrency>
+            <shortName>BYR</shortName>
+        </curr>
+        <description>Депозит в белорусских рублях</description>
+        <endDate>08/04/2016</endDate>
+        <id>7</id>
+        <startdDate>08/02/2016</startdDate>
+        <value>2500000.0</value>
+    </account>
+</accounts>

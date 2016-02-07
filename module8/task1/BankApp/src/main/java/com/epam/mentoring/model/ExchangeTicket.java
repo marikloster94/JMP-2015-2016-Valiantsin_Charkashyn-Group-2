@@ -7,10 +7,20 @@ public class ExchangeTicket implements Serializable {
 
 	private static final long serialVersionUID = -2480266429345567122L;
 
+	private int id;
 	private Person client;
 	private Currency fromCurr;
 	private Currency toCurr;
-	private double fromCurrAmount;
+	private double toCurrAmount;
+	private String status;
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public Person getClient() {
 		return client;
@@ -36,12 +46,20 @@ public class ExchangeTicket implements Serializable {
 		this.toCurr = toCurr;
 	}
 
-	public double getFromCurrAmount() {
-		return fromCurrAmount;
+	public double getToCurrAmount() {
+		return toCurrAmount;
 	}
 
-	public void setFromCurrAmount(double fromCurrAmount) {
-		this.fromCurrAmount = fromCurrAmount;
+	public void setToCurrAmount(double toCurrAmount) {
+		this.toCurrAmount = toCurrAmount;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	@Override
@@ -52,7 +70,7 @@ public class ExchangeTicket implements Serializable {
 		result = prime * result
 				+ ((fromCurr == null) ? 0 : fromCurr.hashCode());
 		long temp;
-		temp = Double.doubleToLongBits(fromCurrAmount);
+		temp = Double.doubleToLongBits(toCurrAmount);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((toCurr == null) ? 0 : toCurr.hashCode());
 		return result;
@@ -77,8 +95,8 @@ public class ExchangeTicket implements Serializable {
 				return false;
 		} else if (!fromCurr.equals(other.fromCurr))
 			return false;
-		if (Double.doubleToLongBits(fromCurrAmount) != Double
-				.doubleToLongBits(other.fromCurrAmount))
+		if (Double.doubleToLongBits(toCurrAmount) != Double
+				.doubleToLongBits(other.toCurrAmount))
 			return false;
 		if (toCurr == null) {
 			if (other.toCurr != null)

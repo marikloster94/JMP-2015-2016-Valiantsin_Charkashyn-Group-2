@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<clients>
+    <person>
+        <dateOfBirth>12/03/1985</dateOfBirth>
+        <name>Петр</name>
+        <passportNumber>MC2345643</passportNumber>
+        <surname>Федоров</surname>
+    </person>
+    <person>
+        <dateOfBirth>12/03/1990</dateOfBirth>
+        <name>Иван</name>
+        <passportNumber>KJ2445723</passportNumber>
+        <surname>Петров</surname>
+    </person>
+    <person>
+        <dateOfBirth>12/05/1970</dateOfBirth>
+        <name>Виктор</name>
+        <passportNumber>MC2467923</passportNumber>
+        <surname>Назаров</surname>
+    </person>
+    <person>
+        <dateOfBirth>17/02/1994</dateOfBirth>
+        <name>Мария</name>
+        <passportNumber>MC2108064</passportNumber>
+        <surname>Клостер</surname>
+    </person>
+    <person>
+        <dateOfBirth>23/03/1995</dateOfBirth>
+        <name>Ольга</name>
+        <passportNumber>VB4567653</passportNumber>
+        <surname>Тереня</surname>
+    </person>
+    <person>
+        <dateOfBirth>12/02/1976</dateOfBirth>
+        <name>Василиса</name>
+        <passportNumber>MN5675434</passportNumber>
+        <surname>Премудрая</surname>
+    </person>
+    <person>
+        <dateOfBirth>23/05/1987</dateOfBirth>
+        <name>Ольга</name>
+        <passportNumber>BG3453212</passportNumber>
+        <surname>Премудрая</surname>
+    </person>
+</clients>

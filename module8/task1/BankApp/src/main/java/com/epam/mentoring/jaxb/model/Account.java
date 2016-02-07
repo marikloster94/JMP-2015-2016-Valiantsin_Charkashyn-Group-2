@@ -1,7 +1,5 @@
 package com.epam.mentoring.jaxb.model;
 
-import java.util.Date;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -15,7 +13,7 @@ public class Account {
 	
 	private int id;
 	private String description;
-	private String startdDate;
+	private String startDate;
 	private String endDate;
 	private double value;
 	private Currency curr;
@@ -37,12 +35,12 @@ public class Account {
 		this.description = description;
 	}
 
-	public String getStartdDate() {
-		return startdDate;
+	public String getStartDate() {
+		return startDate;
 	}
 
-	public void setStartdDate(String startdDate) {
-		this.startdDate = startdDate;
+	public void setStartDate(String startdDate) {
+		this.startDate = startdDate;
 	}
 
 	public String getEndDate() {
@@ -87,7 +85,7 @@ public class Account {
 		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
 		result = prime * result + id;
 		result = prime * result
-				+ ((startdDate == null) ? 0 : startdDate.hashCode());
+				+ ((startDate == null) ? 0 : startDate.hashCode());
 		return result;
 	}
 
@@ -117,10 +115,10 @@ public class Account {
 			return false;
 		if (id != other.id)
 			return false;
-		if (startdDate == null) {
-			if (other.startdDate != null)
+		if (startDate == null) {
+			if (other.startDate != null)
 				return false;
-		} else if (!startdDate.equals(other.startdDate))
+		} else if (!startDate.equals(other.startDate))
 			return false;
 		return true;
 	}

@@ -24,7 +24,7 @@ public class PersonService {
 	public Person searchPerson(String passportNumber){
 		List<Person> clients = getPersons();
 		for(Person client:clients){
-			if(client.getPassportNumber().equals(passportNumber)){
+			if(passportNumber.equals(client.getPassportNumber())){
 				return client;
 			}
 		}
@@ -44,5 +44,9 @@ public class PersonService {
 		}else{
 			throw new AddNewElementException("You can't add new person cause he exist");
 		}
+	}
+	
+	public Person getBankPerson(){
+		return searchPerson("MC2467923");
 	}
 }

@@ -1,7 +1,6 @@
 package com.epam.mentoring.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class Account implements Serializable {
 
@@ -9,7 +8,7 @@ public class Account implements Serializable {
 
 	private int id;
 	private String description;
-	private String startdDate;
+	private String startDate;
 	private String endDate;
 	private double value;
 	private Currency curr;
@@ -32,11 +31,11 @@ public class Account implements Serializable {
 	}
 
 	public String getStartdDate() {
-		return startdDate;
+		return startDate;
 	}
 
 	public void setStartdDate(String startdDate) {
-		this.startdDate = startdDate;
+		this.startDate = startdDate;
 	}
 
 	public String getEndDate() {
@@ -81,7 +80,7 @@ public class Account implements Serializable {
 		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
 		result = prime * result + id;
 		result = prime * result
-				+ ((startdDate == null) ? 0 : startdDate.hashCode());
+				+ ((startDate == null) ? 0 : startDate.hashCode());
 		return result;
 	}
 
@@ -111,10 +110,10 @@ public class Account implements Serializable {
 			return false;
 		if (id != other.id)
 			return false;
-		if (startdDate == null) {
-			if (other.startdDate != null)
+		if (startDate == null) {
+			if (other.startDate != null)
 				return false;
-		} else if (!startdDate.equals(other.startdDate))
+		} else if (!startDate.equals(other.startDate))
 			return false;
 		return true;
 	}

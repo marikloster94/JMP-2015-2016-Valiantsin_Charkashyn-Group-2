@@ -2,7 +2,6 @@ package com.epam.mentoring.jaxb.model;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.epam.mentoring.model.Currency;
@@ -11,9 +10,7 @@ import com.epam.mentoring.model.Currency;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ExchangeRate {
 	
-	@XmlElement(name = "from")
 	private Currency from;
-	@XmlElement(name = "to")
 	private Currency to;
 	private double rate;
 	private String exchangeDay;

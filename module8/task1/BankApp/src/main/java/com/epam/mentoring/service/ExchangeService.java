@@ -1,7 +1,12 @@
 package com.epam.mentoring.service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
+import com.epam.mentoring.exception.ExchangeException;
 import com.epam.mentoring.file.ClientThread;
 import com.epam.mentoring.jaxb.model.ExchangeRates;
 import com.epam.mentoring.model.Account;
@@ -10,7 +15,7 @@ import com.epam.mentoring.model.ExchangeTicket;
 import com.epam.mentoring.util.FileUtil;
 
 public class ExchangeService {
-	private final ClientThread client = new ClientThread("exchange.xml");
+	private final ClientThread client = new ClientThread("exchangeRate.xml");
 
 	public ExchangeService() {
 		client.setClassName(ExchangeRates.class);
@@ -20,8 +25,10 @@ public class ExchangeService {
 		return ((ExchangeRates) FileUtil.loadFromFile(client)).getRates();
 	}
 
-	public ExchangeRate searchExchange(String date, String currencyFrom, String currencyTo) {
+	public ExchangeRate searchExchange(Date exchangeDate, String currencyFrom, String currencyTo) {
 		List<ExchangeRate> rates = getExchangeRates();
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		String date = format.format(exchangeDate);
 		for (ExchangeRate rate : rates) {
 			if(rate.getExchangeDay().equals(date) && rate.getFrom().getShortName().equalsIgnoreCase(currencyFrom) &&
 					rate.getTo().getShortName().equalsIgnoreCase(currencyTo)){
@@ -31,11 +38,37 @@ public class ExchangeService {
 		return null;
 	}
 	
-	public void convert(ExchangeRate rate, List<Account> accounts, ExchangeTicket order){
+	public double convert(ExchangeRate rate, Account accountFrom, List<Account> userAccounts, ExchangeTicket order) throws ExchangeException{
+		double availableValue = accountFrom.getValue();
+		double expectedValue = order.getToCurrAmount();
+		if(availableValue >= expectedValue ){
+			accountFrom.setValue(availableValue - expectedValue);
+		}else{
+			throw new ExchangeException("Cann't exchange value.");
+		}
+		double neededValue = calculate(rate, expectedValue);
+		for(Account acc: userAccounts){
+			if(acc.getCurr().equals(order.getFromCurr())){
+				double userAvailValue = acc.getValue();
+				if(userAvailValue >= neededValue ){
+					acc.setValue(userAvailValue - neededValue);
+				}else{
+					throw new ExchangeException("Cann't exchange value.");
+				}
+			}
+			if(acc.getCurr().equals(order.getToCurr())){
+				acc.setValue(acc.getValue() + expectedValue);
+			}
+		}
+		order.setStatus("done");
+		return neededValue;
 		
 	}
 	
 	public double calculate(ExchangeRate rate, double expectedValue ){
-		return 0;
+		double neededValue = expectedValue * rate.getRate();
+		BigDecimal bd = new BigDecimal(neededValue);
+	    bd = bd.setScale(2, RoundingMode.HALF_UP);
+		return bd.doubleValue();
 	}
 }

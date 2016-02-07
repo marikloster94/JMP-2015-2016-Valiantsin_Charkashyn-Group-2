@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<tickets>
+    <ticket>
+        <client>
+            <dateOfBirth>12/03/1990</dateOfBirth>
+            <name>Иван</name>
+            <passportNumber>KJ2445723</passportNumber>
+            <surname>Петров</surname>
+        </client>
+        <fromCurr>
+            <idCurrency>3</idCurrency>
+            <shortName>BYR</shortName>
+        </fromCurr>
+        <id>2</id>
+        <status>new</status>
+        <toCurr>
+            <idCurrency>2</idCurrency>
+            <shortName>EUR</shortName>
+        </toCurr>
+        <toCurrAmount>200.0</toCurrAmount>
+    </ticket>
+    <ticket>
+        <client>
+            <dateOfBirth>12/03/1985</dateOfBirth>
+            <name>Петр</name>
+            <passportNumber>MC2345643</passportNumber>
+            <surname>Федоров</surname>
+        </client>
+        <fromCurr>
+            <idCurrency>2</idCurrency>
+            <shortName>EUR</shortName>
+        </fromCurr>
+        <id>1</id>
+        <status>new</status>
+        <toCurr>
+            <idCurrency>1</idCurrency>
+            <shortName>USD</shortName>
+        </toCurr>
+        <toCurrAmount>20.0</toCurrAmount>
+    </ticket>
+</tickets>
