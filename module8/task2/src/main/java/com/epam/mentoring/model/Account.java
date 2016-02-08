@@ -1,6 +1,7 @@
 package com.epam.mentoring.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 public class Account implements Serializable {
 
@@ -10,7 +11,7 @@ public class Account implements Serializable {
 	private String description;
 	private String startDate;
 	private String endDate;
-	private double value;
+	private BigDecimal value;
 	private Currency curr;
 	private Person person;
 
@@ -62,11 +63,11 @@ public class Account implements Serializable {
 		this.person = person;
 	}
 
-	public double getValue() {
+	public BigDecimal getValue() {
 		return value;
 	}
 
-	public void setValue(double value) {
+	public void setValue(BigDecimal value) {
 		this.value = value;
 	}
 
@@ -83,7 +84,7 @@ public class Account implements Serializable {
 		result = prime * result
 				+ ((startDate == null) ? 0 : startDate.hashCode());
 		long temp;
-		temp = Double.doubleToLongBits(value);
+		temp = value.longValue();
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
@@ -124,9 +125,7 @@ public class Account implements Serializable {
 				return false;
 		} else if (!startDate.equals(other.startDate))
 			return false;
-		if (Double.doubleToLongBits(value) != Double
-				.doubleToLongBits(other.value))
-			return false;
+		
 		return true;
 	}
 

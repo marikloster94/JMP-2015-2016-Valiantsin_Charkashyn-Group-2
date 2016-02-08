@@ -1,5 +1,7 @@
 package com.epam.mentoring.util;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,10 +11,13 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import org.apache.log4j.Logger;
 
-import com.epam.mentoring.exception.ExchangeException;
 import com.epam.mentoring.model.Account;
 import com.epam.mentoring.model.Currency;
 import com.epam.mentoring.model.ExchangeRate;
@@ -23,6 +28,7 @@ import com.epam.mentoring.service.CurrencyService;
 import com.epam.mentoring.service.ExchangeService;
 import com.epam.mentoring.service.ExchangeTicketService;
 import com.epam.mentoring.service.PersonService;
+import com.epam.mentoring.thread.ExchangeThread;
 
 public class BankUtil {
 
@@ -72,6 +78,7 @@ public class BankUtil {
 				String name = sc.nextLine();
 				curr.setShortName(name);
 				try {
+					curr.setIdCurrency(service.getLastId());
 					service.addCurrency(curr);
 				} catch (Exception e) {
 					System.out.println("Error occured. Please see log file");
@@ -99,13 +106,16 @@ public class BankUtil {
 				try {
 					account = searchAccount(sc);
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					log.error(BankUtil.class, e);
 				}
 				if(account == null){
 					System.out.println("Account didn't found");
 				}else{
-					printAccount(account, formMultiplyCurr(account));
+					try {
+						printAccount(account, formMultiplyCurr(account));
+					} catch (SQLException e) {
+						log.error(BankUtil.class, e);
+					}
 				}
 			}
 				break;
@@ -134,15 +144,15 @@ public class BankUtil {
 		
 	}
 	
-	public static HashMap<String, Double> formMultiplyCurr(Account account){
+	public static HashMap<String, Double> formMultiplyCurr(Account account) throws SQLException{
 		HashMap<String, Double> multiplyCurr = new HashMap<String, Double>();
-		multiplyCurr.put(account.getCurr().getShortName(), account.getValue());
+		multiplyCurr.put(account.getCurr().getShortName(), account.getValue().setScale(2, RoundingMode.HALF_UP).doubleValue());
 		for(String currency : currencies){
 			if(!multiplyCurr.containsKey(currency)){
 				ExchangeService service = new ExchangeService();
 				ExchangeRate rate = service.searchExchange(new Date(), account.getCurr().getShortName(), currency);
 				if(rate != null){
-					double value = service.calculate(rate, account.getValue());
+					double value = service.calculate(rate, account.getValue().setScale(2, RoundingMode.HALF_UP).doubleValue());
 					multiplyCurr.put(currency, value);
 				}
 			}
@@ -178,33 +188,29 @@ public class BankUtil {
 	}
 	
 	public static void exchange() throws SQLException{
-		ExchangeTicketService service = new ExchangeTicketService();
-		AccountService accService = new AccountService();
-		PersonService personService = new PersonService();
-		ExchangeService exchService = new ExchangeService();
-		Person person = personService.getBankPerson();
-		List<ExchangeTicket> tickets = service.getExchangeTickets("new");
-		for(ExchangeTicket ticket : tickets){
-			List<String> currencies = new ArrayList<String>();
-			currencies.add(ticket.getFromCurr().getShortName());
-			currencies.add(ticket.getToCurr().getShortName());
-			List<Account> userAccounts = accService.getAccounts(ticket.getClient().getPassportNumber(), currencies);
-			Account bankAccount = accService.getBankAccount(ticket.getToCurr().getShortName(), person.getPassportNumber());
-			ExchangeRate rate = exchService.searchExchange(new Date(), ticket.getFromCurr().getShortName(), ticket.getToCurr().getShortName());
-			try {
-				double result = exchService.convert(rate, bankAccount, userAccounts, ticket);
-				System.out.println("Dear, "+ticket.getClient().getName() + " " + ticket.getClient().getSurname()+" you should pay "+result+ " "+ticket.getFromCurr().getShortName());
-				accService.updateAccount(bankAccount);
-				for(Account acc: userAccounts){
-					accService.updateAccount(acc);
-				}
-				service.updateExchangeTicket(ticket);
-			} catch (ExchangeException e) {
-				log.error(BankUtil.class, e);
-				break;
-			}
-			
+		ExecutorService service = Executors.newFixedThreadPool(2);
+		ExchangeTicketService excService = new ExchangeTicketService();
+		List<ExchangeTicket> exchangeTickets = excService.getExchangeTickets("new");
+		List<ExchangeThread> tickets = new ArrayList<ExchangeThread>();
+		if(exchangeTickets.size() == 0){
+			System.out.println("There is no exchange tickets");
+			return;
 		}
+		tickets.add(new ExchangeThread(exchangeTickets.get(0)));
+		tickets.add(new ExchangeThread(exchangeTickets.get(1)));
+		tickets.add(new ExchangeThread(exchangeTickets.get(2)));
+		tickets.add(new ExchangeThread(exchangeTickets.get(3)));
+		try {
+			List<Future<String>> results = service.invokeAll(tickets);
+			for(Future<String> result: results){
+				System.out.println(result.get());
+			}
+		} catch (InterruptedException e) {
+			log.error(e);
+		} catch (ExecutionException e) {
+			log.error(e);
+		}
+		
 	}
 	
 	public static Person addPerson(Scanner sc){
@@ -251,9 +257,9 @@ public class BankUtil {
 		Account account = null;
 		try {
 			account = searchAccount(sc);
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+		} catch (SQLException e) {
+			System.out.println("Error occured. Please see log file");
+			log.error(BankUtil.class, e);
 		}
 		if(account == null){
 			System.out.println("Account didn't found. You can't assign person to nonexistent account");
@@ -326,7 +332,7 @@ public class BankUtil {
 		acc.setEndDate(endDate);
 		System.out.println("Enter amount");
 		Double amount = sc.nextDouble();
-		acc.setValue(amount);
+		acc.setValue(new BigDecimal(amount));
 		accountServ.addAccount(acc);
 	}
 }

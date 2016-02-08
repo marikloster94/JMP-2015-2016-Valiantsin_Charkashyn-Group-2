@@ -10,11 +10,10 @@ import java.util.List;
 
 import com.epam.mentoring.exception.HsqlDBException;
 import com.epam.mentoring.model.Currency;
-import com.epam.mentoring.model.Person;
 import com.epam.mentoring.util.SQLUtil;
 
 public class CurrencyDAO implements IDAO {
-	private final String INSERT = "INSERT INTO currency (idCurrency, shortName) VALUES (%s,%s)";
+	private final String INSERT = "INSERT INTO currency (idCurrency, shortName) VALUES (?,?)";
 	private final String GET_ALL = "SELECT idCurrency, shortName from currency";
 	private final String GET = "SELECT idCurrency, shortName from currency where idCurrency = ?";
 	private final String GET_BY_NAME = "SELECT idCurrency, shortName from currency where shortName = ?";
@@ -24,10 +23,11 @@ public class CurrencyDAO implements IDAO {
 	public void create(Object obj) throws HsqlDBException {
 		Currency curr  = (Currency)obj;
 		Connection conn = SQLUtil.getConnection();
-		String query = String.format(INSERT, curr.getIdCurrency(), curr.getShortName());
 		try {
-			Statement st = conn.createStatement();
-			st.execute(query);
+			PreparedStatement st = conn.prepareStatement(INSERT);
+			st.setInt(1, curr.getIdCurrency());
+			st.setString(2, curr.getShortName());
+			st.executeUpdate();
 			st.close();
 		} catch (SQLException ex) {
 			throw new HsqlDBException("Cannot add currency to db", ex);
@@ -51,7 +51,7 @@ public class CurrencyDAO implements IDAO {
 			}
 			st.close();
 		} catch (SQLException ex) {
-			throw new HsqlDBException("Cannot load currencies from db", ex);
+			throw new HsqlDBException("Cannot load currency from db", ex);
 		}finally{
 			if(conn != null)
 				conn.close();

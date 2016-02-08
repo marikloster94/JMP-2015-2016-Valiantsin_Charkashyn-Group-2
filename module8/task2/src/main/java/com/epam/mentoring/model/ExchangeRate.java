@@ -1,6 +1,7 @@
 package com.epam.mentoring.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 public class ExchangeRate implements Serializable {
 
@@ -8,7 +9,7 @@ public class ExchangeRate implements Serializable {
 	private int id;
 	private Currency from;
 	private Currency to;
-	private double rate;
+	private BigDecimal rate;
 	private String exchangeDay;
 
 	public int getId() {
@@ -35,11 +36,11 @@ public class ExchangeRate implements Serializable {
 		this.to = to;
 	}
 
-	public double getRate() {
+	public BigDecimal getRate() {
 		return rate;
 	}
 
-	public void setRate(double rate) {
+	public void setRate(BigDecimal rate) {
 		this.rate = rate;
 	}
 
@@ -60,7 +61,7 @@ public class ExchangeRate implements Serializable {
 		result = prime * result + ((from == null) ? 0 : from.hashCode());
 		result = prime * result + id;
 		long temp;
-		temp = Double.doubleToLongBits(rate);
+		temp = rate.longValue();
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((to == null) ? 0 : to.hashCode());
 		return result;
@@ -87,8 +88,7 @@ public class ExchangeRate implements Serializable {
 			return false;
 		if (id != other.id)
 			return false;
-		if (Double.doubleToLongBits(rate) != Double
-				.doubleToLongBits(other.rate))
+		if (rate.longValue() != other.rate.longValue())
 			return false;
 		if (to == null) {
 			if (other.to != null)

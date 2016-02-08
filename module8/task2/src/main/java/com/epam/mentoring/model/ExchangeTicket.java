@@ -1,6 +1,7 @@
 package com.epam.mentoring.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 public class ExchangeTicket implements Serializable {
 
@@ -11,7 +12,7 @@ public class ExchangeTicket implements Serializable {
 	private Person client;
 	private Currency fromCurr;
 	private Currency toCurr;
-	private double toCurrAmount;
+	private BigDecimal toCurrAmount;
 	private String status;
 	
 	public int getId() {
@@ -46,11 +47,11 @@ public class ExchangeTicket implements Serializable {
 		this.toCurr = toCurr;
 	}
 
-	public double getToCurrAmount() {
+	public BigDecimal getToCurrAmount() {
 		return toCurrAmount;
 	}
 
-	public void setToCurrAmount(double toCurrAmount) {
+	public void setToCurrAmount(BigDecimal toCurrAmount) {
 		this.toCurrAmount = toCurrAmount;
 	}
 
@@ -73,7 +74,7 @@ public class ExchangeTicket implements Serializable {
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result + ((toCurr == null) ? 0 : toCurr.hashCode());
 		long temp;
-		temp = Double.doubleToLongBits(toCurrAmount);
+		temp = toCurrAmount.longValue();
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
@@ -109,8 +110,7 @@ public class ExchangeTicket implements Serializable {
 				return false;
 		} else if (!toCurr.equals(other.toCurr))
 			return false;
-		if (Double.doubleToLongBits(toCurrAmount) != Double
-				.doubleToLongBits(other.toCurrAmount))
+		if (toCurrAmount.longValue() != other.toCurrAmount.longValue())
 			return false;
 		return true;
 	}

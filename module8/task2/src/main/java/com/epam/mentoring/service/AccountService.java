@@ -15,12 +15,16 @@ public class AccountService {
 
 	private static final IDAO dao = new AccountDAO();	
 	
-	public List<Account> getAccounts() {
-		return ((AccountDAO)dao).getAll();
+	public List<Account> getAccounts() throws SQLException {
+		synchronized (dao){
+			return ((AccountDAO)dao).getAll();
+		}
 	}
 
-	public void addAccount(Account acc) throws HsqlDBException {
-		dao.create(acc);
+	public  void addAccount(Account acc) throws HsqlDBException {
+		synchronized (dao){
+			dao.create(acc);
+		}
 	}
 
 	public void assignPerson(Person person, Account account) throws Exception {
@@ -37,14 +41,18 @@ public class AccountService {
 	}
 
 	public Account searchAccount(int id) throws SQLException {
-		return (Account) dao.get(id);
+		synchronized (dao){
+			return (Account) dao.get(id);
+		}
 	}
 
-	public void updateAccount(Account account) throws HsqlDBException {
-		dao.update(account);
+	public  void updateAccount(Account account) throws SQLException {
+		synchronized (dao){
+			dao.update(account);
+		}
 	}
 
-	public List<Account> getAccounts(String passportNumber, List<String> currencies){
+	public  List<Account> getAccounts(String passportNumber, List<String> currencies) throws SQLException{
 		List<Account> accounts = getAccounts();
 		List<Account> filtredAccounts = new ArrayList<Account>();
 		for(Account account : accounts){
@@ -56,7 +64,7 @@ public class AccountService {
 		return filtredAccounts;
 	}
 	
-	public Account getBankAccount(String currency, String passportNumber){
+	public Account getBankAccount(String currency, String passportNumber) throws SQLException{
 		List<Account> accounts = getAccounts();
 		for(Account account : accounts){
 			if(account.getPerson().getPassportNumber().equals(passportNumber) && account.getCurr().getShortName().equals(currency)){

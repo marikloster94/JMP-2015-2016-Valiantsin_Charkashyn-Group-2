@@ -14,7 +14,7 @@ import com.epam.mentoring.util.SQLUtil;
 
 public class PersonDAO implements IDAO {
 
-	private final String INSERT = "INSERT INTO person (id, name, surname, dateOfBirth, passportNumber) VALUES (%s,%s,%s,%s,%s )";
+	private final String INSERT = "INSERT INTO person (id, name, surname, dateOfBirth, passportNumber) VALUES (?,?,?,?,? )";
 	private final String GET_ALL = "SELECT id, name, surname, dateOfBirth, passportNumber from person";
 	private final String GET = "SELECT id, name, surname, dateOfBirth, passportNumber from person where id = ?";
 	private final String GET_BY_PASS = "SELECT id, name, surname, dateOfBirth, passportNumber from person where passportNumber = ?";
@@ -25,10 +25,14 @@ public class PersonDAO implements IDAO {
 	public void create(Object obj) throws HsqlDBException {
 		Person person  = (Person)obj;
 		Connection conn = SQLUtil.getConnection();
-		String query = String.format(INSERT, person.getId(), person.getName(), person.getSurname(), person.getDateOfBirth(), person.getPassportNumber() );
 		try {
-			Statement st = conn.createStatement();
-			st.execute(query);
+			PreparedStatement st = conn.prepareStatement(INSERT);
+			st.setInt(1, person.getId());
+			st.setString(2, person.getName());
+			st.setString(3, person.getSurname());
+			st.setString(4, person.getDateOfBirth());
+			st.setString(5, person.getPassportNumber());
+			st.executeUpdate();
 			st.close();
 		} catch (SQLException ex) {
 			throw new HsqlDBException("Cannot add person todb", ex);
@@ -75,7 +79,7 @@ public class PersonDAO implements IDAO {
 		try {
 			PreparedStatement st = conn.prepareStatement(GET);
 			st.setInt(1, id);
-			rs = st.executeQuery(GET);
+			rs = st.executeQuery();
 			while(rs.next()){
 				int index = 1;
 				person = new Person();
@@ -100,13 +104,14 @@ public class PersonDAO implements IDAO {
 	public Object get(String passportNumber) throws SQLException {
 		Connection conn = SQLUtil.getConnection();
 		ResultSet rs = null;
-		Person person = new Person();
+		Person person = null;
 		try {
 			PreparedStatement st = conn.prepareStatement(GET_BY_PASS);
 			st.setString(1, passportNumber);
-			rs = st.executeQuery(GET);
+			rs = st.executeQuery();
 			while(rs.next()){
 				int index = 1;
+				person = new Person();
 				person.setId(rs.getInt(index++));
 				person.setName(rs.getString(index++));
 				person.setSurname(rs.getString(index++));
@@ -115,7 +120,7 @@ public class PersonDAO implements IDAO {
 			}
 			st.close();
 		} catch (SQLException ex) {
-			throw new HsqlDBException("Cannot add person todb", ex);
+			throw new HsqlDBException("Cannot get person by passportNumber", ex);
 		}finally{
 			if(conn != null)
 				conn.close();

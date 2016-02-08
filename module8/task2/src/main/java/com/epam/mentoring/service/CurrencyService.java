@@ -12,11 +12,15 @@ public class CurrencyService {
 	private static final IDAO dao = new CurrencyDAO();	
 
 	public List<Currency> getCurrencies() throws SQLException {
-		return ((CurrencyDAO)dao).getAll();
+		synchronized (dao){
+			return ((CurrencyDAO)dao).getAll();
+		}
 	}
 
 	public Currency searchCurrency(String currency) throws SQLException {
-		return ((CurrencyDAO)dao).get(currency);
+		synchronized (dao){
+			return ((CurrencyDAO)dao).get(currency);
+		}
 	}
 
 	public void addCurrency(Currency currency) throws Exception {
@@ -26,6 +30,17 @@ public class CurrencyService {
 			dao.create(currency);
 		} else {
 			 throw new AddNewElementException("You can't add this currency cause it exist");
+		}
+	}
+	
+	
+	public int getLastId() throws AddNewElementException{
+		synchronized (dao){
+			try {
+				return dao.getLastId();
+			} catch (SQLException e) {
+				 throw new AddNewElementException("You can't add this currency");
+			}
 		}
 	}
 

@@ -12,12 +12,16 @@ public class PersonService {
 	
 	private static final IDAO dao = new PersonDAO();	
 	
-	public List<Person> getPersons() throws SQLException{
-		return ((PersonDAO)dao).getAll();
+	public  List<Person> getPersons() throws SQLException{
+		synchronized (dao){
+			return ((PersonDAO)dao).getAll();
+		}
 	}
 
 	public Person searchPerson(String passportNumber) throws SQLException{
-		return (Person) ((PersonDAO)dao).get(passportNumber);
+		synchronized (dao){
+			return (Person) ((PersonDAO)dao).get(passportNumber);
+		}
 	}
 	
 	public void addPerson(Person searchPerson) throws Exception{
