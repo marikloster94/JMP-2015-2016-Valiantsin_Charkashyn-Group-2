@@ -7,15 +7,15 @@
 <title>Add client</title>
 </head>
 <body>
-<form action="/ModuleUI?command=addClient" method="POST">
+<form action="ModuleUI?command=addClient" method="POST">
 First Name: <input type="text" name="first_name" required />
-<br />
+<br /> <br />
 Last Name: <input type="text" name="last_name" required />
-<br />
+<br /><br />
 Date of birth: <input required type="text" name="date" pattern="^([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2})$"/>
-<br />
+<br /><br />
 Passport number: <input required type="text" name="passport" pattern="[A-Z]{2}[0-9]{7}"/>
-<br />
+<br /><br />
 <input type="submit" value=Add />
 </form>
 </body>

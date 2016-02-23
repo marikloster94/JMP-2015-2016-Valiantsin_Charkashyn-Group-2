@@ -15,12 +15,12 @@ public class AddPersonCommand implements Command {
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) {
-		log.info("Add new person");
-		String result = "/ModuleUI/page/main.jsp";
-		String firstName = (String) request.getAttribute("first_name");
-		String lastName = (String) request.getAttribute("last_name");
-		String date = (String) request.getAttribute("date");
-		String passport = (String) request.getAttribute("passport");
+		log.debug("Add new person");
+		String result = "/main.jsp";
+		String firstName = (String) request.getParameter("first_name");
+		String lastName = (String) request.getParameter("last_name");
+		String date = (String) request.getParameter("date");
+		String passport = (String) request.getParameter("passport");
 		PersonService service = new PersonService();
 		Person person = new Person(firstName, lastName, date);
 		person.setPassportNumber(passport);
@@ -28,7 +28,8 @@ public class AddPersonCommand implements Command {
 			service.addPerson(person);
 		} catch (Exception e) {
 			log.error(AddPersonCommand.class, e);
-			result = "/ModuleUI/page/error.jsp";
+			request.setAttribute("error", e.getMessage());
+			result = "/error.jsp";
 		}
 		return result;
 	}

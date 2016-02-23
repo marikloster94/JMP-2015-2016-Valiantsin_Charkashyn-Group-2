@@ -14,11 +14,12 @@ public class InitDatabaseCommand implements Command {
 	
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) {
-		String result = "/ModuleUI/page/main.jsp";
+		String result = "/main.jsp";
 		try {
 			service.createDB();
 		} catch (Exception e) {
-			result = "/ModuleUI/page/error.jsp";
+			result = "/error.jsp";
+			request.setAttribute("error", e.getMessage());
 			log.error(InitDatabaseCommand.class, e);
 		}
 		return result;

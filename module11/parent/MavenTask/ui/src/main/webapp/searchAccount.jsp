@@ -7,6 +7,11 @@
 <title>Search account</title>
 </head>
 <body>
-
+<form action="ModuleUI?command=searchAccount" method="POST">
+<p>Enter account number</p>
+Account number: <input required type="number" name="id" />
+<br/><br/>
+<input type="submit" value=Search />
+</form>
 </body>
 </html>

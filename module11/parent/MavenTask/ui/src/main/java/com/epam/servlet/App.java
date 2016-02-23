@@ -2,6 +2,8 @@ package com.epam.servlet;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,16 +17,25 @@ public class App extends HttpServlet {
 
 	private final RequestHelper helper = new RequestHelper();
 
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException{
-		
+	public void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
 		String command = request.getParameter("command");
 		Command c = helper.getCommand(command);
 		String result = null;
 		if(c != null){
 			result = c.execute(request, response);
 		}else{
-			result = "page/error.jsp";
+			result = "/error.jsp";
 		}
-		response.sendRedirect(result);
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(result);
+		dispatcher.forward(request, response);
+//		response.sendRedirect(result);
+	}
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
+		processRequest(request, response);
+	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
+		processRequest(request, response);
 	}
 }

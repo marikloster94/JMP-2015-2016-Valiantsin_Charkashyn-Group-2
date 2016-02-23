@@ -4,9 +4,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Assign person</title>
+<title>Add currency</title>
 </head>
 <body>
-
+<form action="ModuleUI?command=addCurrency" method="POST">
+Short Name of currency: <input type="text" name="shortName" required />
+<br /> <br />
+<input type="submit" value=Add />
+</form>
 </body>
 </html>

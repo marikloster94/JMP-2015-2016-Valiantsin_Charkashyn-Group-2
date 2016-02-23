@@ -19,21 +19,21 @@ public class SearchPersonCommand implements Command {
 			HttpServletResponse response) {
 		log.debug("Search person");
 		String result = "/searchPerson.jsp";
-		String passport = (String) request.getAttribute("passport");
+		String passport = (String) request.getParameter("passport");
 		PersonService service = new PersonService();
 		try {
 			Person person = service.searchPerson(passport);
 			if(person == null){
-				System.out.println("Person was not found");
+				log.debug("Person was not found");
+				request.setAttribute("error", "Person was not found");
+				return "/error.jsp";
 			}
-			if(person != null){
-				System.out.println("Person was found");
-				request.setAttribute("passport", person.getPassportNumber());
-				request.setAttribute("first_name", person.getName());
-				request.setAttribute("last_name", person.getSurname());
-			}
-			
+			log.debug("Person was found");
+			request.setAttribute("passport", person.getPassportNumber());
+			request.setAttribute("first_name", person.getName());
+			request.setAttribute("last_name", person.getSurname());
 		} catch (SQLException e) {
+			request.setAttribute("error", e.getMessage());
 			log.error(SearchPersonCommand.class, e);
 			result = "/error.jsp";
 		}
