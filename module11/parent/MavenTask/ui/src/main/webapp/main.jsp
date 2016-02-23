@@ -5,7 +5,7 @@
 		<li><p><b><a href="ModuleUI?command=initDAO" title="">Init database</a></b></p></li>
 	</ul>
 	<ul>
-		<li><p><b><a href="addAccount.jsp" title="">Open account</a></b></p></li>
+		<li><p><b><a href="ModuleUI?command=prepareOpenAccount" title="">Open account</a></b></p></li>
 	</ul>
 	<ul>
 		<li><p><b><a href="ModuleUI?command=prepareAssignPerson" title="">Assign person</a></b></p></li>
@@ -26,7 +26,10 @@
 		<li><p><b><a href="searchAccount.jsp" title="">Search account</a></b></p></li>
 	</ul>
 	<ul>
-		<li><p><b><a href="acounts.jsp" title="">Show accounts</a></b></p></li>
+		<li><p><b><a href="ModuleUI?command=showAccounts" title="">Show accounts</a></b></p></li>
+	</ul>
+	<ul>
+		<li><p><b><a href="ModuleUI?command=showClients" title="">Show accounts</a></b></p></li>
 	</ul>
 </body>
 </html>

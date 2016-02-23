@@ -6,7 +6,7 @@
 <title>Assign person</title>
 </head>
 <body>
-	<!-- <form action="ModuleUI?command=assignPerson" method="POST"> -->
+	 <form action="ModuleUI?command=assignPerson" method="POST"> 
 		Select person: 
 		<select name="person">
 			<c:forEach var="men" items="${persons}" >
@@ -26,6 +26,6 @@
 		</select> 
 		<br /><br />
 		 <input type="submit" value=Assign />
-	<!-- </form>  -->
+ </form> 
 </body>
 </html>

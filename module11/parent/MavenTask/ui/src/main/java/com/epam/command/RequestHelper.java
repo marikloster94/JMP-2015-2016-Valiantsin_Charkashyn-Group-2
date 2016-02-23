@@ -9,10 +9,11 @@ public class RequestHelper {
 	
 	public RequestHelper(){
 		commands.put("initDAO", new InitDatabaseCommand());
-		commands.put("openAccount", new InitDatabaseCommand());
+		commands.put("openAccount", new OpenAccountCommand());
+		commands.put("prepareOpenAccount", new PrepareOpenAccountCommand());
 		commands.put("assignPerson", new AssignPersonCommand());
 		commands.put("prepareAssignPerson", new PrepareAssignCommand());
-		commands.put("doExchange", new InitDatabaseCommand());
+		commands.put("doExchange", new DoExchangeCommand());
 		commands.put("addClient", new AddPersonCommand());
 		commands.put("addCurrency", new AddCurrencyCommand());
 		commands.put("searchPerson", new SearchPersonCommand());

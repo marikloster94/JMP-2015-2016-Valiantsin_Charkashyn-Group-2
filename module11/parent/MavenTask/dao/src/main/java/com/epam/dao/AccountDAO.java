@@ -58,7 +58,7 @@ public class AccountDAO implements IDAO {
 				acc = new Account();
 				acc.setId(rs.getInt(index++));
 				acc.setDescription(rs.getString(index++));
-				acc.setStartdDate(rs.getString(index++));
+				acc.setStartDate(rs.getString(index++));
 				acc.setEndDate(rs.getString(index++));
 				Person person = (Person) new PersonDAO().get(rs.getInt(index++));
 				acc.setPerson(person);
@@ -136,7 +136,7 @@ public class AccountDAO implements IDAO {
 				Account acc = new Account();
 				acc.setId(rs.getInt(index++));
 				acc.setDescription(rs.getString(index++));
-				acc.setStartdDate(rs.getString(index++));
+				acc.setStartDate(rs.getString(index++));
 				acc.setEndDate(rs.getString(index++));
 				Person person = (Person) new PersonDAO().get(rs.getInt(index++));
 				acc.setPerson(person);

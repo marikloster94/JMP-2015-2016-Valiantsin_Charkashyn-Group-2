@@ -35,7 +35,7 @@ public class Account implements Serializable {
 		return startDate;
 	}
 
-	public void setStartdDate(String startdDate) {
+	public void setStartDate(String startdDate) {
 		this.startDate = startdDate;
 	}
 

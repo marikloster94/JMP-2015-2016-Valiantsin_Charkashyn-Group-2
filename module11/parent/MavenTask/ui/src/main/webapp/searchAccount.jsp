@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -12,6 +12,16 @@
 Account number: <input required type="number" name="id" />
 <br/><br/>
 <input type="submit" value=Search />
+<c:if test="${account!=null}">
+<p>Account info:</p>
+      <p><c:out value="${account.description}"/></p>
+      <p>Start date: <c:out value="${account.startDate}"/></p>
+      <p>End date :<c:out value="${account.endDate}"/></p>
+      <p>Money :<c:out value="${account.value}"/> <c:out value="${account.curr.shortName}"/></p>
+      <p>Client :<c:out value="${account.person.name}"/> <c:out value="${account.person.surname}"/></p>
+
+<a href="/main.jsp" title="">Return to main page</a>
+</c:if>
 </form>
 </body>
 </html>

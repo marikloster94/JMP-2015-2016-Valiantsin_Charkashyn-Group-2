@@ -26,12 +26,12 @@ public class PrepareAssignCommand implements Command {
 			List<Person> persons = service.getPersons();
 			if(persons.isEmpty()){
 				request.setAttribute("error", "No persons for assign");
-				result = "/error.jsp";
+				return "/error.jsp";
 			}
 			List<Account> accounts = accServ.getAccounts();
 			if(accounts.isEmpty()){
 				request.setAttribute("error", "No persons for assign");
-				result = "/error.jsp";
+				return "/error.jsp";
 			}
 			request.setAttribute("persons", persons);
 			request.setAttribute("accounts", accounts);

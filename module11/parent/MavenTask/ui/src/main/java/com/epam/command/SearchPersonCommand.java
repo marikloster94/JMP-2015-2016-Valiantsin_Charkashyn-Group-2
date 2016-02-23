@@ -32,6 +32,7 @@ public class SearchPersonCommand implements Command {
 			request.setAttribute("passport", person.getPassportNumber());
 			request.setAttribute("first_name", person.getName());
 			request.setAttribute("last_name", person.getSurname());
+			request.setAttribute("person", person);
 		} catch (SQLException e) {
 			request.setAttribute("error", e.getMessage());
 			log.error(SearchPersonCommand.class, e);
