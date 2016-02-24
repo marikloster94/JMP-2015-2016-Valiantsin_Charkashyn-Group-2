@@ -16,7 +16,7 @@ public class ShowAccountsCommand implements Command {
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) {
-		String result = "/accounts.jsp";
+		String result = "/acounts.jsp";
 		AccountService service = new AccountService();
 		try {
 			List<Account> accounts = service.getAccounts();

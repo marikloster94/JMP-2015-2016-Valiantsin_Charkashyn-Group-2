@@ -19,7 +19,7 @@ Passport number: <input required type="text" name="passport" pattern="[A-Z]{2}[0
       <p>Surname:  <c:out value="${person.surname}"/></p>
       <p>Date of birth:  <c:out value="${person.dateOfBirth}"/></p>
       <p>Passport Number:  <c:out value="${person.passportNumber}"/></p>
-<a href="/main.jsp" title="">Return to main page</a>
+<a href="main.jsp" title="">Return to main page</a>
 </c:if>
 
 </body>

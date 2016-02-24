@@ -29,7 +29,7 @@
 		<li><p><b><a href="ModuleUI?command=showAccounts" title="">Show accounts</a></b></p></li>
 	</ul>
 	<ul>
-		<li><p><b><a href="ModuleUI?command=showClients" title="">Show accounts</a></b></p></li>
+		<li><p><b><a href="ModuleUI?command=showClients" title="">Show clients</a></b></p></li>
 	</ul>
 </body>
 </html>

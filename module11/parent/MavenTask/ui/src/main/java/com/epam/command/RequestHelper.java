@@ -18,6 +18,8 @@ public class RequestHelper {
 		commands.put("addCurrency", new AddCurrencyCommand());
 		commands.put("searchPerson", new SearchPersonCommand());
 		commands.put("searchAccount", new SearchAccountCommand());
+		commands.put("showAccounts", new ShowAccountsCommand());
+		commands.put("showClients", new ShowClientsCommand());
 	}
 	
 	public Command getCommand(String command){
