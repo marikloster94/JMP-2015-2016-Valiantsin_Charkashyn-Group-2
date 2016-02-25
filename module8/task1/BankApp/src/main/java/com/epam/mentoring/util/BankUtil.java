@@ -11,7 +11,6 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import com.epam.mentoring.exception.AddNewElementException;
 import com.epam.mentoring.exception.ExchangeException;
 import com.epam.mentoring.model.Account;
 import com.epam.mentoring.model.Currency;
@@ -28,6 +27,8 @@ public class BankUtil {
 
 	private static Logger log = Logger.getLogger(BankUtil.class);
 	private static final String DATE_REGEX = "^([0]?[1-9]|[1|2][0-9]|[3][0|1])[.//-]([0]?[1-9]|[1][0-2])[.//-]([0-9]{4}|[0-9]{2})$";
+	private static final String PASSPORT_REGEX = "[A-Z]{2}[0-9]{7}";
+	private static final String DOUBLE_REGEX = "//d+//.//d+";
 	private static final List<String> currencies = Arrays.asList(new String []{"USD", "BYR", "EUR"});
 	
 	public static void menu(){
@@ -35,7 +36,11 @@ public class BankUtil {
 		while(menu){
 			showMenu(); 
 			Scanner sc = new Scanner(System.in);
-			int value = sc.nextInt();
+			int value = 0;
+			String menuValue = sc.next();
+			if(menuValue.matches("//d+")){			
+				value = Integer.parseInt(menuValue);
+			}
 			switch(value){
 			case 1:	
 				addAccount(sc);
@@ -69,7 +74,7 @@ public class BankUtil {
 			case 6:{
 				Person person = searchPerson(sc);
 				if(person == null){
-					System.out.println("Person with didn't found");
+					System.out.println("Person didn't found");
 				}else{
 					System.out.println("Person: "+ person.getName() +" " + person.getSurname() +"  found");
 				}
@@ -89,8 +94,7 @@ public class BankUtil {
 				menu = false;
 				break;
 			default:
-				System.out.println("Please, choose another case");
-				showMenu();	
+				System.out.println("Please, enter correct menu value ");
 				
 			}
 		}
@@ -140,16 +144,30 @@ public class BankUtil {
 		sc.nextLine();
 		System.out.println("Enter client passport number");
 		String passportNumber = sc.nextLine();
-		PersonService service = new PersonService();
-		return service.searchPerson(passportNumber);
+		if(passportNumber.matches(PASSPORT_REGEX)){
+			PersonService service = new PersonService();
+			return service.searchPerson(passportNumber);
+		}else{
+			System.out.println("Please enter passport number in format 'XX1111111'");
+			return null;
+		}
 		
 	}
 	
 	public static Account searchAccount(Scanner sc ){
 		System.out.println("Enter account id");
-		int id = sc.nextInt();
-		AccountService accountService = new AccountService();
-		return accountService.searchAccount(id);
+		String value = sc.next();
+		if(value.matches("//d+")){			
+			int id = Integer.parseInt(value);
+			AccountService accountService = new AccountService();
+			return accountService.searchAccount(id);
+		}else{
+			System.out.println("Please enter accountId in number format");
+			return null;
+		}
+		
+		
+		
 	}
 	
 	public static void exchange(){
@@ -166,6 +184,10 @@ public class BankUtil {
 			List<Account> userAccounts = accService.getAccounts(ticket.getClient().getPassportNumber(), currencies);
 			Account bankAccount = accService.getBankAccount(ticket.getToCurr().getShortName(), person.getPassportNumber());
 			ExchangeRate rate = exchService.searchExchange(new Date(), ticket.getFromCurr().getShortName(), ticket.getToCurr().getShortName());
+			if(rate == null) {
+				System.out.println("No rate for exchange found");
+				return;
+			}
 			try {
 				double result = exchService.convert(rate, bankAccount, userAccounts, ticket);
 				System.out.println("Dear, "+ticket.getClient().getName() + " " + ticket.getClient().getSurname()+" you should pay "+result+ " "+ticket.getFromCurr().getShortName());
@@ -198,8 +220,14 @@ public class BankUtil {
 		}
 		System.out.println("Enter user passport number");
 		String passportNumber = sc.nextLine();
-		Person person = new Person(name, surname, date);
-		person.setPassportNumber(passportNumber);
+		Person person = null;
+		if(passportNumber.matches(PASSPORT_REGEX)){
+			person = new Person(name, surname, date);
+			person.setPassportNumber(passportNumber);
+		}else{
+			System.out.println("You should enter passport number in format 'XX1111111'");
+			return null;
+		}
 		try {
 			service.addPerson(person);
 		} catch (Exception e) {
@@ -213,14 +241,12 @@ public class BankUtil {
 	public static void assignPerson(Scanner sc){
 		Person person = searchPerson(sc);
 		if(person == null){
-			System.out.println("You can't assign nonexistent person to account");
 			log.warn("You can't assign nonexistent person to account");
 			return;
 		}
 		
 		Account account = searchAccount(sc);
 		if(account == null){
-			System.out.println("Account didn't found. You can't assign person to nonexistent account");
 			log.warn("Account didn't found. You can't assign person to nonexistent account");
 			return;
 		}
@@ -239,21 +265,10 @@ public class BankUtil {
 		Account acc = new Account();
 		acc.setId(accountServ.getLastId());
 		sc.nextLine();
-		System.out.println("Enter client passport number");
-		String passportNumber = sc.nextLine();
-		
-		PersonService service = new PersonService();
-		
-		Person person = service.searchPerson(passportNumber);
-		if(person == null){
-			System.out.println("There is not client with passport number "+passportNumber+". You should create new person");
-			person = addPerson(sc);
-		}
-		if(person == null){
-			System.out.println("Error occured while adding person. Please see log file");
+		Person person = searchPerson(sc);
+		if(person == null) {
 			return;
 		}
-		System.out.println("New client successfully added");
 		acc.setPerson(person);
 		System.out.println("Enter short name for search currency");
 		String currency = sc.nextLine();
@@ -285,8 +300,13 @@ public class BankUtil {
 		}
 		acc.setEndDate(endDate);
 		System.out.println("Enter amount");
-		Double amount = sc.nextDouble();
-		acc.setValue(amount);
+		String value = sc.next();
+		if(value.matches(DOUBLE_REGEX)) {
+			acc.setValue(Double.valueOf(value));
+		}else{
+			System.out.println("Amount should be in numeric format");
+			return;
+		}
 		accountServ.addAccount(acc);
 	}
 }
