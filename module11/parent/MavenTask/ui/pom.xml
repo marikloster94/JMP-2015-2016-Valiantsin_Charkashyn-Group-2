@@ -52,12 +52,6 @@
 					<include>log4j.properties</include>
 				</includes>
 			</resource>
-			<resource>
-				<directory>src/main/webapp/WEB-INF</directory>
-				<includes>
-					<include>web.xml</include>
-				</includes>
-			</resource>
 		</resources>
 		<plugins>
             <plugin>
