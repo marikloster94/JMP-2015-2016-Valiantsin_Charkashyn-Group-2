@@ -12,18 +12,18 @@ public class Producer implements Runnable {
 	}
 
 	public void run() {
-		for (int i = 0; i < 200; i++) {
+		while (true) {
 			try {
 				Thread.sleep(10);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			synchronized (data){
+			synchronized (data) {
 				int message = new Random().nextInt(150);
 				data.add(message);
 				data.notify();
 				System.out.println("Producer add message " + message);
-				
+
 			}
 		}
 	}

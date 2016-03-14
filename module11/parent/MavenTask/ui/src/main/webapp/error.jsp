@@ -3,6 +3,6 @@
 	<body>
 		<center></center><lable>${error}</lable></center>
 		</br></br>
-		<a href="/main.jsp" title="">Return to main page</a>
+		<a href="main.jsp" title="">Return to main page</a>
 	</body>
 </html>

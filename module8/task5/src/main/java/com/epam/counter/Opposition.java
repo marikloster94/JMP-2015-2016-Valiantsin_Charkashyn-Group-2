@@ -10,24 +10,27 @@ public class Opposition {
 
         private int count = 10;
         private final Lock lock = new ReentrantLock();
-        public synchronized void increment() {
-        	lock.lock();
-            count++;
-            notify();
-            lock.unlock();
+       
+        public void increment() {
+        	synchronized (lock) {
+	        	count++;
+	            lock.notify();
+        	}
         }
 
-        public synchronized void decrement() {
-        	try {
-	        	while(count == 0 ){
-					wait();
-	        	}
-        	} catch (InterruptedException e) {
-				e.printStackTrace();
+        public void decrement() {
+        	synchronized (lock) {
+        		try {
+    	        	while(count == 0 ){
+    					lock.wait();
+    	        	}
+            	} catch (InterruptedException e) {
+    				e.printStackTrace();
+    			}
+        		count--;
 			}
-        	lock.lock();
-        	count--;
-            lock.unlock();
+        	
+        	
         }
 
         public int get() {

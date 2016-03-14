@@ -52,6 +52,10 @@ public class DoExchangeCommand implements Command {
 			List<Account> userAccounts = accService.getAccounts(ticket.getClient().getPassportNumber(), currencies);
 			Account bankAccount = accService.getBankAccount(ticket.getToCurr().getShortName(), person.getPassportNumber());
 			ExchangeRate rate = exchService.searchExchange(new Date(), ticket.getFromCurr().getShortName(), ticket.getToCurr().getShortName());
+			if (rate == null){
+				request.setAttribute("error", "No rate for exchange");
+				return "/error.jsp";
+			}
 			double exchangeRes = 0.0;
 			exchangeRes = exchService.convert(rate, bankAccount, userAccounts, ticket);
 			accService.updateAccount(bankAccount);

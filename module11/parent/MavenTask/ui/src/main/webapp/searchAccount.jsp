@@ -20,7 +20,7 @@ Account number: <input required type="number" name="id" />
       <p>Money :<c:out value="${account.value}"/> <c:out value="${account.curr.shortName}"/></p>
       <p>Client :<c:out value="${account.person.name}"/> <c:out value="${account.person.surname}"/></p>
 
-<a href="/main.jsp" title="">Return to main page</a>
+<a href="main.jsp" title="">Return to main page</a>
 </c:if>
 </form>
 </body>

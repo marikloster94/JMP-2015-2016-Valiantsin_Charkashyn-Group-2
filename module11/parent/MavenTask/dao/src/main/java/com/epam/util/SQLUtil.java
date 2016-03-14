@@ -209,21 +209,21 @@ public class SQLUtil {
 		Statement statement =null;
 		try {
 			statement = connection.createStatement();
-			String query = "INSERT INTO exchangeRate (id, exchangeDay, rate, idCurrencyFrom, idCurrencyTo) VALUES (1, '08/02/2016', 4.42E-5, 3, 1)";
+			String query = "INSERT INTO exchangeRate (id, exchangeDay, rate, idCurrencyFrom, idCurrencyTo) VALUES (1, '24/02/2016', 4.42E-5, 3, 1)";
 			statement.executeUpdate(query);
-			query = "INSERT INTO exchangeRate (id, exchangeDay, rate, idCurrencyFrom, idCurrencyTo) VALUES (2, '09/02/2016', 4.40E-5, 3, 1)";
+			query = "INSERT INTO exchangeRate (id, exchangeDay, rate, idCurrencyFrom, idCurrencyTo) VALUES (2, '24/02/2016', 4.40E-5, 3, 1)";
 			statement.executeUpdate(query);
-			query = "INSERT INTO exchangeRate (id, exchangeDay, rate, idCurrencyFrom, idCurrencyTo) VALUES (3, '08/02/2016', 4.08E-5, 3, 2)";
+			query = "INSERT INTO exchangeRate (id, exchangeDay, rate, idCurrencyFrom, idCurrencyTo) VALUES (3, '25/02/2016', 4.08E-5, 3, 2)";
 			statement.executeUpdate(query);
-			query = "INSERT INTO exchangeRate (id, exchangeDay, rate, idCurrencyFrom, idCurrencyTo) VALUES (4, '09/02/2016', 4.10E-5, 3, 2)";
+			query = "INSERT INTO exchangeRate (id, exchangeDay, rate, idCurrencyFrom, idCurrencyTo) VALUES (4, '24/02/2016', 4.10E-5, 3, 2)";
 			statement.executeUpdate(query);
-			query = "INSERT INTO exchangeRate (id, exchangeDay, rate, idCurrencyFrom, idCurrencyTo) VALUES (5, '08/02/2016', 0.8921, 1, 2)";
+			query = "INSERT INTO exchangeRate (id, exchangeDay, rate, idCurrencyFrom, idCurrencyTo) VALUES (5, '24/02/2016', 0.8921, 1, 2)";
 			statement.executeUpdate(query);
-			query = "INSERT INTO exchangeRate (id, exchangeDay, rate, idCurrencyFrom, idCurrencyTo) VALUES (6, '08/02/2016', 1.109, 2, 1)";
+			query = "INSERT INTO exchangeRate (id, exchangeDay, rate, idCurrencyFrom, idCurrencyTo) VALUES (6, '24/02/2016', 1.109, 2, 1)";
 			statement.executeUpdate(query);
-			query = "INSERT INTO exchangeRate (id, exchangeDay, rate, idCurrencyFrom, idCurrencyTo) VALUES (7, '09/02/2016', 0.9, 1, 2)";
+			query = "INSERT INTO exchangeRate (id, exchangeDay, rate, idCurrencyFrom, idCurrencyTo) VALUES (7, '25/02/2016', 0.9, 1, 2)";
 			statement.executeUpdate(query);
-			query = "INSERT INTO exchangeRate (id, exchangeDay, rate, idCurrencyFrom, idCurrencyTo) VALUES (8, '09/02/2016', 1.106, 2, 1)";
+			query = "INSERT INTO exchangeRate (id, exchangeDay, rate, idCurrencyFrom, idCurrencyTo) VALUES (8, '25/02/2016', 1.106, 2, 1)";
 			statement.executeUpdate(query);
 			statement.close();
 		} catch (SQLException e) {

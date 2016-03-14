@@ -33,7 +33,7 @@ public class AccountDAO implements IDAO {
 			PreparedStatement st = conn.prepareStatement(INSERT);
 			st.setInt(1, acc.getId());
 			st.setString(2, acc.getDescription());
-			st.setString(3, acc.getStartdDate());
+			st.setString(3, acc.getStartDate());
 			st.setString(4, acc.getEndDate());
 			st.setInt(5, acc.getPerson().getId());
 			st.setDouble(6, acc.getValue().doubleValue());
