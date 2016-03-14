@@ -4,9 +4,9 @@
 	After install you can go to jenkins main page: http://localhost:8080
 
 2. Install JDK7, Maven, Ant
-	Download jdk7 from official site (). Set system environment varialibles (JAVA_HOME, PATH, JRE_HOME).
-	Download ant from () and unpack it. Set system environment varialibles (ANT_HOME, PATH).
-	Download maven from (). Set system environment varialibles ().
+	Download jdk7 from official site (http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html ). Set system environment varialibles (JAVA_HOME, PATH, JRE_HOME).
+	Download ant from ( https://ant.apache.org/bindownload.cgi ) and unpack it. Set system environment varialibles (ANT_HOME, PATH).
+	Download maven from ( http://maven.apache.org/download.cgi ). Set system environment varialibles ().
 
 3. Configure Jenkins with installed JDK, Maven, Ant:
 	Go to http://localhost:8080/configure and configure Jenkins with installed JDK, Maven, Ant. 
@@ -20,7 +20,7 @@
 5.  Install 10 Jenkins plugins
 	Go to http://localhost:8080/pluginManager/available and choose necessary plugins for install. 
 	For example, check checkbox near next plugins (Git plugin, Mailer Plugin, Git client plugin,
-	Parametrized trigger, email-ext, Scriptler, Groovy postbuild, Green Balls) and click button "Install without restart".
+	Parametrized trigger, email-ext, Scriptler, Groovy postbuild, Locale plugin) and click button "Install without restart".
 	
 	You can see all already installed plugins on the page http://localhost:8080/pluginManager/installed .
 	
@@ -40,7 +40,17 @@ and developer user (build job, cancel builds).
 	On the next page insert all requied data that applies to your project (i.e. project description, jdk, manage project versions, triggers, build action, what should do after build and other)
 
 8.  Setup simple trigger and build action (echo current build number)	
-
+	
+	Setup trigger:
+	- Choose job Find item "Build triggers". Choose subitem "Build periodically", at the timetable field enter cron 
+	(i.e. 30 9 * * * for running build every day at 9:30 am) to determine start build. 
+	
+	Set build action:
+	- Find item "Build", choose from dropdown "Invoke top-level Maven targets", then enter maven version 
+	( it was configured in item number 2), maven goals ( i.e. package) and set path to the pom file (i.e. module11/parent/MavenTask/pom.xml). Then click Save.
+	
 9.  Send email about build result
+
+	Find item "Post build action" and enter all email recievers, who should know building result. Click button Save.
 	
 	
