@@ -28,44 +28,44 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "randomNumberGenerator", propOrder = {
-    "arg0",
-    "arg1"
+    "lowerBound",
+    "upperBound"
 })
 public class RandomNumberGenerator {
 
-    protected int arg0;
-    protected int arg1;
+    protected int lowerBound;
+    protected int upperBound;
 
     /**
      * Gets the value of the arg0 property.
      * 
      */
-    public int getArg0() {
-        return arg0;
+    public int getLowerBound() {
+        return lowerBound;
     }
 
     /**
      * Sets the value of the arg0 property.
      * 
      */
-    public void setArg0(int value) {
-        this.arg0 = value;
+    public void setLowerBound(int value) {
+        this.lowerBound = value;
     }
 
     /**
      * Gets the value of the arg1 property.
      * 
      */
-    public int getArg1() {
-        return arg1;
+    public int getUpperBound() {
+        return upperBound;
     }
 
     /**
      * Sets the value of the arg1 property.
      * 
      */
-    public void setArg1(int value) {
-        this.arg1 = value;
+    public void setUpperBound(int value) {
+        this.upperBound = value;
     }
 
 }

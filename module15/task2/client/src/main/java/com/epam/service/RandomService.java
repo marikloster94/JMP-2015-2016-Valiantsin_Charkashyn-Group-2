@@ -37,9 +37,9 @@ public interface RandomService {
     @ResponseWrapper(localName = "randomNumberGeneratorResponse", targetNamespace = "http://service.epam.com/", className = "com.epam.service.RandomNumberGeneratorResponse")
     @Action(input = "http://service.epam.com/RandomService/randomNumberGeneratorRequest", output = "http://service.epam.com/RandomService/randomNumberGeneratorResponse")
     public int randomNumberGenerator(
-        @WebParam(name = "arg0", targetNamespace = "")
+        @WebParam(name = "lowerBound", targetNamespace = "")
         int arg0,
-        @WebParam(name = "arg1", targetNamespace = "")
+        @WebParam(name = "upperBound", targetNamespace = "")
         int arg1);
 
 }
