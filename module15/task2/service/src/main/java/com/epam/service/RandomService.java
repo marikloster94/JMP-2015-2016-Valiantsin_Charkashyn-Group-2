@@ -14,6 +14,9 @@ public class RandomService {
 			@WebParam(name = "lowerBound") int lowerBound,
 			@WebParam(name = "upperBound") int upperBound) {
 		Random r = new Random();
+		if(lowerBound > upperBound){
+			return 0;
+		}
 		return r.nextInt(upperBound - lowerBound) + lowerBound;
 	}
 }
