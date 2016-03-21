@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,7 +13,7 @@ import org.apache.cxf.jaxrs.client.WebClient;
 
 import com.epam.command.Command;
 import com.epam.command.RequestHelper;
-
+@MultipartConfig
 public class App extends HttpServlet {
 
 	private static final long serialVersionUID = 4845018080135856585L;

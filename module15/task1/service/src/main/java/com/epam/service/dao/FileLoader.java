@@ -19,15 +19,14 @@ public class FileLoader implements Loader {
 		Object result = null;
 		try {
 			lock.lock();
-//			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-//			URL url = classLoader.getResource("/WEB-INF/classes/".concat(filename));
-//			if(url == null){
-//				throw new Exception("URL can not be null");
-//			}
+			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+			URL url = classLoader.getResource("/".concat(filename));
+			if(url == null){
+				throw new Exception("URL can not be null");
+			}
 			JAXBContext jaxbContext = JAXBContext.newInstance(className);
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-//			result = jaxbUnmarshaller.unmarshal(new File(url.getFile()));
-			result = jaxbUnmarshaller.unmarshal(new File("D:\\person.xml"));
+			result = jaxbUnmarshaller.unmarshal(new File(url.getFile()));
 		} catch (Exception e) {
 			log.error(e);
 			throw new Exception("Problems with loading file", e);

@@ -5,6 +5,9 @@
 	<artifactId>WebClient</artifactId>
 	<version>1.0</version>
 	<packaging>war</packaging>
+	<properties>
+	<apache.httpcomponents.version>4.3.2</apache.httpcomponents.version>
+	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>log4j</groupId>
@@ -47,6 +50,39 @@
 			<version>2.0</version>
 			<scope>provided</scope>
 		</dependency>
+		
+		
+		<!-- Apache HTTP components for writing test client -->
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+			<version>3.1</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>${apache.httpcomponents.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpcore</artifactId>
+			<version>${apache.httpcomponents.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpmime</artifactId>
+			<version>${apache.httpcomponents.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>4.2.0.RELEASE</version>
+		</dependency>
+		
 	</dependencies>
 	<build>
 		<resources>

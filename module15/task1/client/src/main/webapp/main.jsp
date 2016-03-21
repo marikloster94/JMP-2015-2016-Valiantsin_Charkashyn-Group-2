@@ -13,5 +13,8 @@
 	<ul>
 		<li><p><b><a href="WebClient?command=downloadLogo" title="">Download logo</a></b></p></li>
 	</ul>
+	<ul>
+		<li><p><b><a href="uploadImage.jsp" title="">Upload logo</a></b></p></li>
+	</ul>
 </body>
 </html>

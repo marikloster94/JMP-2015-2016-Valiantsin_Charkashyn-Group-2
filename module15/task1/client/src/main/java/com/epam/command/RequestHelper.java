@@ -16,6 +16,7 @@ public class RequestHelper {
 		commands.put("delete", new DeleteCommand());
 		commands.put("showUpdateWidow", new ShowUpdateWindow());
 		commands.put("update", new UpdateCommand());
+		commands.put("upload", new UploadCommand());
 	}
 	
 	public Command getCommand(String command){

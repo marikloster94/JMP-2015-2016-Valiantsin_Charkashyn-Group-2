@@ -21,13 +21,13 @@ public class FileWriter implements Writer {
 			JAXBContext jaxbContext = JAXBContext.newInstance(className);
 			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-//			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-//			URL url = classLoader.getResource("/WEB-INF/classes/".concat(filename));
-//			if(url == null){
-//				throw new Exception("URL can not be null");
-//			}
-//			jaxbMarshaller.marshal(data, new File(url.getFile()));
-			jaxbMarshaller.marshal(data, new File("D:\\person.xml"));
+			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+			URL url = classLoader.getResource("/".concat(filename));
+			if(url == null){
+				throw new Exception("URL can not be null");
+			}
+			jaxbMarshaller.marshal(data, new File(url.getFile()));
+//			jaxbMarshaller.marshal(data, new File("D:\\person.xml"));
 		} catch (Exception e) {
 			log.error(e);
 			throw new Exception("Problems with writing to file occured", e);

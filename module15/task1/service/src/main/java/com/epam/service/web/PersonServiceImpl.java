@@ -125,13 +125,14 @@ public class PersonServiceImpl implements PersonService {
 			return Response.status(Response.Status.NOT_FOUND).build();
 		}
 		List<Person> persons = ((Persons) obj).getPersons();
+		List<Person> found = new ArrayList<Person>();
 		for (Person per : persons) {
 			if (person.getLogin().equals(per.getLogin())) {
-				int index = persons.indexOf(per);
-				persons.remove(index);
-				persons.add(index, person);
+				found.add(per);
 			}
 		}
+		persons.removeAll(found);
+		persons.add(person);
 		Persons pers = new Persons();
 		pers.setPersons(persons);
 		try {

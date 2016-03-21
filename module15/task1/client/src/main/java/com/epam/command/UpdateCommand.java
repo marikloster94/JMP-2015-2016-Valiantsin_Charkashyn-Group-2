@@ -11,13 +11,20 @@ import com.epam.service.model.Person;
 
 public class UpdateCommand implements Command {
 	private static final Logger log = Logger.getLogger(UpdateCommand.class);
-	@Override
+
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response, WebClient client) {
 		log.debug("Update person");
 		String result = "/searchPerson.jsp";
-		Person person = (Person) request.getAttribute("person");
-		int i = client.path("/PersonService/updatePerson/").put(person).getStatus();
+		String firstName = (String) request.getParameter("name");
+		String lastName = (String) request.getParameter("surname");
+		String date = (String) request.getParameter("date");
+		String login = (String) request.getParameter("log");
+		String email = (String) request.getParameter("mail");
+		Person person = new Person(firstName, lastName, date);
+		person.setLogin(login);
+		person.setEmail(email);
+		int i = client.path("/PersonService/updatePerson").put(person).getStatus();
 		client.reset();
 		if( i == Response.Status.OK.getStatusCode()){
 			request.setAttribute("person", person);
@@ -33,7 +40,7 @@ public class UpdateCommand implements Command {
 			request.setAttribute("error", "Error occured while updating person");
 			result = "/error.jsp";
 		}
-		return null;
+		return result;
 	}
 
 }

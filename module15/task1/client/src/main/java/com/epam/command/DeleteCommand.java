@@ -4,12 +4,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.cxf.jaxrs.client.WebClient;
-
-import com.epam.service.model.Person;
+import org.apache.log4j.Logger;
 
 public class DeleteCommand implements Command {
 
-	@Override
+	private static final Logger log = Logger.getLogger(DeleteCommand.class);
+	
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response, WebClient client) {
 		String person = (String) request.getParameter("login");

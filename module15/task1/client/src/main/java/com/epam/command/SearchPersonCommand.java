@@ -13,7 +13,6 @@ public class SearchPersonCommand implements Command {
 	private static final Logger log = Logger
 			.getLogger(SearchPersonCommand.class);
 
-	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response, WebClient client) {
 		log.debug("Search person");

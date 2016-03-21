@@ -15,6 +15,8 @@ import javax.ws.rs.core.Response;
 import com.epam.service.model.Person;
 
 @WebService (name = "PersonService")
+@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 public interface PersonService {
 	@GET
     @Consumes(MediaType.APPLICATION_XML)
