@@ -12,6 +12,10 @@ public class RequestHelper {
 		commands.put("addPerson", new AddPersonCommand());
 		commands.put("showPersons", new ShowPersonsCommand());
 		commands.put("searchPerson", new SearchPersonCommand());
+		commands.put("downloadLogo", new DownloadLogoCommand());
+		commands.put("delete", new DeleteCommand());
+		commands.put("showUpdateWidow", new ShowUpdateWindow());
+		commands.put("update", new UpdateCommand());
 	}
 	
 	public Command getCommand(String command){

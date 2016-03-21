@@ -41,8 +41,8 @@ public interface PersonService {
 	Response deletePerson(@PathParam("login") String login);
 	
 	@PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_XML)
+    @Produces(MediaType.APPLICATION_XML)
     @Path("/updatePerson")
 	Response updatePerson (Person person);
 	

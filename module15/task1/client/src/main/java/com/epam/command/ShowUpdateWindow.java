@@ -8,16 +8,11 @@ import org.apache.log4j.Logger;
 
 import com.epam.service.model.Person;
 
-public class SearchPersonCommand implements Command {
-
-	private static final Logger log = Logger
-			.getLogger(SearchPersonCommand.class);
-
+public class ShowUpdateWindow implements Command {
+	private static final Logger log = Logger.getLogger(ShowUpdateWindow.class);
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response, WebClient client) {
-		log.debug("Search person");
-		String result = "/searchPerson.jsp";
 		String login = (String) request.getParameter("login");
 		Person person = client.path("/PersonService/getPerson/"+login).get(Person.class);
 		client.reset();
@@ -28,7 +23,7 @@ public class SearchPersonCommand implements Command {
 		}
 		log.debug("Person was found");
 		request.setAttribute("person", person);
-		return result;
+		return "/update.jsp";
 	}
 
 }

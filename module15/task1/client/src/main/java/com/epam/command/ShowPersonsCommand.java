@@ -18,6 +18,7 @@ public class ShowPersonsCommand implements Command {
 			HttpServletResponse response, WebClient client) {
 		String result = "/persons.jsp";
 		List<Person> persons = (List<Person>) client.path("/PersonService/getAllPerson").getCollection(Person.class);
+		client.reset();
 		if (persons.isEmpty()) {
 			request.setAttribute("error", "No persons");
 			return "/error.jsp";

@@ -21,8 +21,8 @@ Login: <input required type="text" name="login" />
       <p>Login:  <c:out value="${person.login}"/></p>
       <p>Email:  <c:out value="${person.email}"/></p>
 <a href="main.jsp" title="">Return to main page</a>
-<p><a href="WebClient?command=delete" title="">Delete person</a></p>
-<p><a href="WebClient?command=update" title="">Update person</a></p>
+<p><a href="WebClient?command=delete&login=${person.login}" title="">Delete person</a></p>
+<p><a href="WebClient?command=showUpdateWidow&login=${person.login}" title="">Update person</a></p>
 </c:if>
 
 </body>

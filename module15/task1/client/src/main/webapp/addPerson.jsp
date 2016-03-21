@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Add client</title>
+<title>Add person</title>
 </head>
 <body>
-<form action="ModuleUI?command=addPerson" method="POST">
+<form action="WebClient?command=addPerson" method="POST">
 First Name: <input type="text" name="first_name" required />
 <br /> <br />
 Last Name: <input type="text" name="last_name" required />
@@ -18,6 +18,7 @@ Login: <input type="text" name="login" required/>
 <br /><br />
 Email: <input type="text" name="email" required/>
 <br /><br />
+
 <input type="submit" value=Add />
 </form>
 </body>

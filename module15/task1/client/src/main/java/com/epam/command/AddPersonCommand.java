@@ -26,6 +26,7 @@ public class AddPersonCommand implements Command {
 		person.setLogin(login);
 		person.setEmail(email);
 		int i = client.path("/PersonService/addPerson").post(person).getStatus();
+		client.reset();
 		if( i == Response.Status.OK.getStatusCode()){
 			return result;
 		}

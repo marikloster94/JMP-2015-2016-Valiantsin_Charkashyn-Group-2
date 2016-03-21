@@ -15,7 +15,6 @@
 
     <context:component-scan base-package="com.epam.service" />
 
-
     <jaxrs:server id="PersonService" address="/PersonService">
         <jaxrs:providers>
             <bean class="org.codehaus.jackson.jaxrs.JacksonJsonProvider" />
@@ -44,7 +43,7 @@
     </jaxrs:server>
     
     <bean id="personServiceImpl" class="com.epam.service.web.PersonServiceImpl"/>
-    <bean id="logoServiceImpl" class="com.epam.service.web.LogoService"/>
+    <bean id="logoServiceImpl" class="com.epam.service.web.LogoServiceImpl"/>
     
     
 	
