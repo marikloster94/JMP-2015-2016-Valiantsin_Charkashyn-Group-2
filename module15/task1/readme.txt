@@ -1,0 +1,1 @@
+Image should be locate in the root directory of disk D
