@@ -1,5 +1,6 @@
 package com.epam.module.jpa.service;
 
+import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,10 +34,16 @@ public class AccountService {
 	}
 	@Transactional
 	public void delete(Account acc){
+		Account findedAcc = null;
 		if( dao == null){
 			return;
 		}
-		Account findedAcc = dao.get(acc.getAccountID());
+		
+		try{
+			findedAcc = dao.get(acc.getAccountID());
+		} catch(NoResultException ex){
+			ex.printStackTrace();
+		}
 		if(findedAcc != null){
 			dao.delete(findedAcc);
 		}

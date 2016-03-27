@@ -1,9 +1,19 @@
 package com.epam.module.jpa.entity;
 
-import javax.persistence.*;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import org.hibernate.annotations.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
 
 /**
  * Created by alex on 26.03.16.
@@ -56,6 +66,7 @@ public class Person {
 	}
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "client")
+	@Cascade({CascadeType.SAVE_UPDATE})
 	@PrimaryKeyJoinColumn
 	public List<Account> getAccounts() {
 		return accounts;

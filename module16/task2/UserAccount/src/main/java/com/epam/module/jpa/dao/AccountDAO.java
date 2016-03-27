@@ -1,6 +1,7 @@
 package com.epam.module.jpa.dao;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Component;
@@ -34,7 +35,7 @@ public class AccountDAO {
 		return em.merge(account);
 	}
 	
-	public Account get(int id){
+	public Account get(int id) throws NoResultException{
 		Account findedAcc = em.find(Account.class, id);
 		return findedAcc;
 	}
