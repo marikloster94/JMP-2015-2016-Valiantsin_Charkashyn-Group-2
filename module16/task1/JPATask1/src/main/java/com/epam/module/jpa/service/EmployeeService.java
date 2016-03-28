@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.epam.module.jpa.dao.EmployeeDAO;
 import com.epam.module.jpa.entity.Employee;
+import com.epam.module.jpa.entity.Unit;
 
 @Component
 public class EmployeeService {
@@ -22,9 +23,32 @@ public class EmployeeService {
 		if (dao == null) {
 			return null;
 		}
+		if (person == null) {
+			return null;
+		}
 		person = dao.save(person);
 
 		return person;
+	}
+	
+	@Transactional
+	public Employee update(Employee person) {
+		if (dao == null) {
+			return null;
+		}
+		if (person == null) {
+			return null;
+		}
+		Employee finded = null;
+		try {
+			finded = dao.get(person.getEmployeeID());
+		} catch (NoResultException ex) {
+			ex.printStackTrace();
+		}
+		if (finded == null) {
+			return null;
+		}
+		return dao.update(person);
 	}
 
 	@Transactional
@@ -32,11 +56,15 @@ public class EmployeeService {
 		if (dao == null) {
 			return;
 		}
+		if (person == null) {
+			return;
+		}
 		try {
 			Employee finded = dao.get(person.getEmployeeID());
 			if (finded != null) {
 				dao.delete(finded);
 			}
+			
 		} catch (NoResultException ex) {
 			ex.printStackTrace();
 		}
@@ -58,6 +86,20 @@ public class EmployeeService {
 		return finded;
 
 	}
+	
+	public Employee get(int id) {
+		if (dao == null) {
+			return null;
+		}
+		Employee finded = null;
+		try {
+			finded = dao.get(id);
+
+		} catch (NoResultException ex) {
+			ex.printStackTrace();
+		}
+		return finded;
+	}
 
 	@Transactional
 	public List<Employee> getPeople() {
@@ -68,6 +110,22 @@ public class EmployeeService {
 			ex.printStackTrace();
 		}
 		return finded;
+	}
+	
+	public Employee addEmployeeToUnit(Unit unit, int emplId){
+		if (dao == null) {
+			return null;
+		}
+		if (unit == null) {
+			return null;
+		}
+		Employee employee = get(emplId);
+		if( employee == null ) {
+			return null;
+		}
+		employee.setUnit(unit);
+		return update(employee);
+		
 	}
 
 }

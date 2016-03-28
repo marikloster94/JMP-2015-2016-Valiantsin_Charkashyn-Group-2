@@ -48,7 +48,7 @@ public class EmployeeDAO {
 		if (person == null) {
 			throw new IllegalArgumentException("Person can not be null");
 		}
-		person = em.merge(person);
+		em.merge(person);
 		return person;
 	}
 }

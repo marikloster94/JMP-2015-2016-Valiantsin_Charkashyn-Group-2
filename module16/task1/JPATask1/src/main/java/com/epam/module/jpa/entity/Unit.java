@@ -3,8 +3,10 @@ package com.epam.module.jpa.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -16,11 +18,14 @@ import org.hibernate.annotations.CascadeType;
 @Table(name = "unit")
 public class Unit {
 
+	
 	private int unitId;
 	private String descr;
 	
 	private List<Employee> unit = new ArrayList<Employee> ();
 
+	@Id
+	@Column (name = "unitId")
 	public int getUnitId() {
 		return unitId;
 	}
@@ -29,6 +34,7 @@ public class Unit {
 		this.unitId = unitId;
 	}
 
+	@Column (name="description")
 	public String getDescr() {
 		return descr;
 	}
@@ -36,6 +42,7 @@ public class Unit {
 	public void setDescr(String descr) {
 		this.descr = descr;
 	}
+	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "unit")
 	@Cascade({CascadeType.SAVE_UPDATE})
 	@PrimaryKeyJoinColumn

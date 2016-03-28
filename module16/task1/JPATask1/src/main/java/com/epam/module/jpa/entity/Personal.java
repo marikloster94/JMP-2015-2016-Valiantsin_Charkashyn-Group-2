@@ -15,9 +15,6 @@ public class Personal {
 	private int id;
 	private String passNumber;
 	private int age;
-	
-	@OneToOne
-	@JoinColumn(name = "employeeId")
 	private Employee employee;
 	
 	@Id
@@ -47,6 +44,9 @@ public class Personal {
 	public void setAge(int age) {
 		this.age = age;
 	}
+	
+	@OneToOne
+	@JoinColumn(name = "employeeId")
 	public Employee getEmployee() {
 		return employee;
 	}
