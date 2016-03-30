@@ -64,7 +64,7 @@ public class Employee {
 		this.surname = surname;
 	}
 
-	@OneToOne(mappedBy = "employee")
+	@OneToOne(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
 	public Personal getInfo() {
 		return info;
 	}
@@ -82,7 +82,7 @@ public class Employee {
 		this.address = address;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER, targetEntity=Unit.class, cascade=CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "unitId", nullable = false)
 	public Unit getUnit() {
 		return unit;
@@ -92,7 +92,7 @@ public class Employee {
 		this.unit = unit;
 	}
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name = "employee_projects", joinColumns = @JoinColumn(name = "employeeId"), inverseJoinColumns = @JoinColumn(name = "projectId"))
 	public List<Project> getProjects() {
 		return projects;

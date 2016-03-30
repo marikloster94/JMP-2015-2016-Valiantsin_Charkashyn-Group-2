@@ -28,6 +28,10 @@ public class ProjectService {
 		}
 		return dao.save(project);
 	}
+	
+	public Project get(int id){
+		return dao.get(id);
+	}
 
 	@Transactional
 	public void delete(Project project) {

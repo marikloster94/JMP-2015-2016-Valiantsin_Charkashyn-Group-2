@@ -3,8 +3,10 @@ package com.epam.module.jpa.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -40,8 +42,7 @@ public class Project {
 		this.desc = desc;
 	}
 
-	@ManyToMany
-	@JoinTable(name = "employee_projects", joinColumns = @JoinColumn(name = "projectId"), inverseJoinColumns = @JoinColumn(name = "employeeId"))
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "projects", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	public List<Employee> getEmployees() {
 		return employees;
 	}

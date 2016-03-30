@@ -1,5 +1,6 @@
 package com.epam.module.jpa.runner;
 
+import java.util.List;
 import java.util.Scanner;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -41,42 +42,174 @@ public class AppHelper {
 			Scanner sc = new Scanner(System.in);
 			int value = sc.nextInt();
 			switch (value) {
-			case 1:
+			case 1:{
 				Unit unit = addUnit(ctx.getBean(UnitService.class), sc);
 				System.out.println(unit.getUnitId());
+			}
 				break;
-			case 2:
+			case 2:{
 				Project project = addProject(ctx.getBean(ProjectService.class), sc);
 				System.out.println(project.getProjectId());
+			}
 				break;
-			case 3:
+			case 3:{
 				Employee employee = addEmployee(ctx.getBean(EmployeeService.class), ctx.getBean(UnitService.class), ctx.getBean(PersonalService.class), sc);
 				System.out.println(employee.getEmployeeID());
+			}
 				break;
-			case 4:
+			case 4: {
 				System.out.println("Enter unit id for delete");
 				int id = sc.nextInt();
 				UnitService serv = ctx.getBean(UnitService.class);
 				Unit unitForDelete = serv.get(id);
 				serv.delete(unitForDelete);
-				unit = serv.get(id);
+				Unit unit = serv.get(id);
 				if(unit == null) {
 					System.out.println("Unit was successfully deleted");
 				}
+			}
 				break;
-			case 5:
+			case 5:{
+				System.out.println("Enter project id for delete");
+				int id = sc.nextInt();
+				ProjectService service = ctx.getBean(ProjectService.class);
+				Project project = service.get(id);
+				service.delete(project);
+				project = service.get(id);
+				if(project == null) {
+					System.out.println("Project was successfully deleted");
+				}
+			}
 				break;
-			case 6:
+			case 6:{
+				System.out.println("Enter employee id for delete");
+				int id = sc.nextInt();
+				EmployeeService emplService = ctx.getBean(EmployeeService.class);
+				Employee employee = emplService.get(id);
+				emplService.delete(employee);
+				employee = emplService.get(id);
+				if(employee == null) {
+					System.out.println("Employee was successfully deleted");
+				}
+			}
 				break;
-			case 7:
+			case 7:{
+				System.out.println("Enter employee id for adding to unit");
+				int id = sc.nextInt();
+				EmployeeService emplService = ctx.getBean(EmployeeService.class);
+				Employee employee = emplService.get(id);
+				if(employee == null){
+					System.out.println("There is no employee for adding to unit");
+					break;
+				}
+				Unit oldUnit = employee.getUnit();
+				System.out.println("Enter unit id for update employee");
+				id = sc.nextInt();
+				UnitService serv = ctx.getBean(UnitService.class);
+				Unit unit = serv.get(id);
+				if(unit == null){
+					System.out.println("There is no unit with id:"+id+"  Please add unit");
+					unit = addUnit( serv, sc);
+				}
+				employee.setUnit(unit);
+				employee = emplService.update(employee);
+				if(oldUnit.getUnitId() != employee.getUnit().getUnitId()){
+					System.out.println("Person was successfully changed unit");
+				}
+			}
 				break;
-			case 8:
+			case 8:{
+				System.out.println("Enter project id ");
+				int id = sc.nextInt();
+				ProjectService serv = ctx.getBean(ProjectService.class);
+				Project project = serv.get(id);
+				if(project == null){
+					System.out.println("There is no project with id:"+id);
+					break;
+				}
+				System.out.println("Enter employee id");
+				id = sc.nextInt();
+				EmployeeService emplService = ctx.getBean(EmployeeService.class);
+				Employee employee = emplService.get(id);
+				if(employee == null){
+					System.out.println("There is no employee with id:"+id);
+					break;
+				}
+				List<Project> projects = employee.getProjects();
+				for(Project pr: projects){
+					if(pr.getProjectId() == project.getProjectId()){
+						System.out.println("This employee works on selected project. Can not add this employee for such project again");
+						break;
+					}
+				}
+				int size = projects.size();
+				projects.add(project);
+				employee = emplService.update(employee);
+				if (size != employee.getProjects().size()) {
+					System.out.println("Employee was successfully added to the project with id:"+project.getProjectId());
+				}
+				
+			}
 				break;
-			case 9:
+			case 9:{
+				System.out.println("Enter unit id for update ");
+				int id = sc.nextInt();
+				UnitService serv = ctx.getBean(UnitService.class);
+				Unit unit = serv.get(id);
+				if(unit == null){
+					System.out.println("There is no unit with id:"+id);
+					break;
+				}
+				String oldDesc = unit.getDescr();
+				System.out.println("Enter unit description for update ");
+				String descr = sc.next();
+				unit.setDescr(descr);
+				unit = serv.update(unit);
+				if(!oldDesc.equals(descr) && id == unit.getUnitId()){
+					System.out.println("Unit was successfully updated");
+				}
+				
+			}
 				break;
-			case 10:
+			case 10:{
+				System.out.println("Enter project id for update ");
+				int id = sc.nextInt();
+				ProjectService serv = ctx.getBean(ProjectService.class);
+				Project project = serv.get(id);
+				if(project == null){
+					System.out.println("There is no project with id:"+id);
+					break;
+				}
+				String oldDesc = project.getDesc();
+				System.out.println("Enter project description for update ");
+				String descr = sc.next();
+				project.setDesc(descr);
+				project = serv.update(project);
+				if(!oldDesc.equals(descr) && id == project.getProjectId()){
+					System.out.println("Project was successfully updated");
+				}
+			}
 				break;
-			case 11:
+			case 11:{
+				System.out.println("Enter employee id for update");
+				int id = sc.nextInt();
+				EmployeeService emplService = ctx.getBean(EmployeeService.class);
+				Employee employee = emplService.get(id);
+				if(employee == null){
+					System.out.println("There is no employee with id:"+id);
+					break;
+				}
+				System.out.println("Please enter address info: City");
+				String city = sc.next();
+				System.out.println("Please enter address info: Street");
+				String street = sc.next();
+				employee.getAddress().setCity(city);
+				employee.getAddress().setStreet(street);
+				employee = emplService.update(employee);
+				if(employee.getAddress().getCity().equals(city) && employee.getAddress().getStreet().equals(street) && id == employee.getEmployeeID() ){
+					System.out.println("Employee was successfully updated");
+				}
+			}
 				break;
 			case 12:
 				menu = false;

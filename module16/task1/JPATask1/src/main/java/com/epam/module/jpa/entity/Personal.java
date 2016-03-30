@@ -1,5 +1,6 @@
 package com.epam.module.jpa.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -45,7 +46,7 @@ public class Personal {
 		this.age = age;
 	}
 	
-	@OneToOne
+	@OneToOne( cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "employeeId")
 	public Employee getEmployee() {
 		return employee;
