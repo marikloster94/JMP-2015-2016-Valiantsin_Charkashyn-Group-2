@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -81,7 +82,7 @@ public class Employee {
 		this.address = address;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER, targetEntity=Unit.class, cascade=CascadeType.ALL)
 	@JoinColumn(name = "unitId", nullable = false)
 	public Unit getUnit() {
 		return unit;

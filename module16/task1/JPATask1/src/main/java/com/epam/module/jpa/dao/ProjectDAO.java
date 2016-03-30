@@ -9,7 +9,6 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Component;
 
 import com.epam.module.jpa.entity.Project;
-import com.epam.module.jpa.entity.Unit;
 
 @Component
 public class ProjectDAO {

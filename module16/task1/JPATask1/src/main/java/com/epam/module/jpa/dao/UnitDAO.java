@@ -20,8 +20,7 @@ public class UnitDAO {
 		if (unit == null) {
 			throw new IllegalArgumentException("Unit can not be null");
 		}
-		unit = em.merge(unit);
-		return unit;
+		return em.merge(unit);
 	}
 
 	public void delete(Unit unit) {
