@@ -33,10 +33,7 @@ public class EmployeeDAO {
 	}
 
 	public Employee getByPassport(String passNumber) throws NoResultException {
-		return em
-				.createQuery(
-						"SELECT p FROM Person p WHERE p.passNumber = :passport",
-						Employee.class).setParameter("passport", passNumber)
+		return em.createQuery("SELECT p FROM Person p WHERE p.passNumber = :passport",Employee.class).setParameter("passport", passNumber)
 				.getSingleResult();
 	}
 
