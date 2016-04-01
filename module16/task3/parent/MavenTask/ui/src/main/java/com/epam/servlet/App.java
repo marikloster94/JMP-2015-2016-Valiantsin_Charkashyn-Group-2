@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+
 import com.epam.command.Command;
 import com.epam.command.RequestHelper;
 
@@ -15,10 +18,18 @@ public class App extends HttpServlet {
 
 	private static final long serialVersionUID = 4845018080135856585L;
 
-	private final RequestHelper helper = new RequestHelper();
-
+	private RequestHelper helper ;
+	private WebApplicationContext application ;
+	
 	public void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
 		String command = request.getParameter("command");
+		if(application == null){
+			application = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
+		}
+		
+		if(helper == null) {
+			helper = new RequestHelper(application);
+		}
 		Command c = helper.getCommand(command);
 		String result = null;
 		if(c != null){

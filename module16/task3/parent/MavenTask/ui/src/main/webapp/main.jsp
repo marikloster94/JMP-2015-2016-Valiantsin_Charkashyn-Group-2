@@ -2,9 +2,6 @@
 <html>
 <body>
 	<ul>
-		<li><p><b><a href="ModuleUI?command=initDAO" title="">Init database</a></b></p></li>
-	</ul>
-	<ul>
 		<li><p><b><a href="ModuleUI?command=prepareOpenAccount" title="">Open account</a></b></p></li>
 	</ul>
 	<ul>

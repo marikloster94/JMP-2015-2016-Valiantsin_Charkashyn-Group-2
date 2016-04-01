@@ -1,12 +1,12 @@
 package com.epam.command;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.springframework.web.context.WebApplicationContext;
 
 import com.epam.model.Currency;
 import com.epam.model.Person;
@@ -17,11 +17,16 @@ public class PrepareOpenAccountCommand implements Command {
 	
 	private static final Logger log = Logger.getLogger(PrepareOpenAccountCommand.class);
 
+	private PersonService service;
+	private CurrencyService currService;
+	
+	public PrepareOpenAccountCommand(WebApplicationContext context) {
+		currService =  context.getBean(CurrencyService.class);
+		service =  context.getBean(PersonService.class);
+	}
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) {
-		CurrencyService currService  = new CurrencyService();
-		PersonService service = new PersonService();
 		String result = "/addAccount.jsp";
 		try {
 			List<Currency> currencies = currService.getCurrencies();

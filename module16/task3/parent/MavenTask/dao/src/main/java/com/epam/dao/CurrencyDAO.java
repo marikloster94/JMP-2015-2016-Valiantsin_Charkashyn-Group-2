@@ -46,7 +46,7 @@ public class CurrencyDAO  {
 		if (currencyName == null) {
 			return null;
 		}
-		return (Currency) em.createQuery("SELECT c FROM Currency c WHERE c.shortName =: shortName", Currency.class).setParameter("shortName", currencyName).getSingleResult();
+		return (Currency) em.createQuery("SELECT c FROM Currency c WHERE c.shortName =:shortName", Currency.class).setParameter("shortName", currencyName).getSingleResult();
 	}
 
 }

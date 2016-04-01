@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.springframework.web.context.WebApplicationContext;
 
 import com.epam.exception.ElementNotFoundException;
 import com.epam.exception.ExchangeException;
@@ -25,10 +26,21 @@ public class DoExchangeCommand implements Command {
 
 	private static final Logger log = Logger.getLogger(DoExchangeCommand.class);
 	
+	private AccountService accService;
+	private PersonService personService;
+	private ExchangeTicketService service;	
+	private ExchangeService exchService;
+	
+	public DoExchangeCommand(WebApplicationContext context) {
+		personService = context.getBean(PersonService.class);
+		accService =  context.getBean(AccountService.class);
+		service =  context.getBean(ExchangeTicketService.class);
+		exchService =  context.getBean(ExchangeService.class);
+	}
+	
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) {
-		ExchangeTicketService service = new ExchangeTicketService();
 		String result = "/exchangeTicket.jsp";
 		List<ExchangeTicket> exchangeTickets = null;
 		try {
@@ -41,9 +53,6 @@ public class DoExchangeCommand implements Command {
 			return "/error.jsp";
 		}
 		ExchangeTicket ticket = exchangeTickets.get(0);
-		AccountService accService = new AccountService();
-		PersonService personService = new PersonService();
-		ExchangeService exchService = new ExchangeService();
 		try {
 			Person person = personService.getBankPerson();
 			List<String> currencies = new ArrayList<String>();

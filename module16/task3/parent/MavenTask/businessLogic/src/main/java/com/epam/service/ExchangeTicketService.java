@@ -3,14 +3,19 @@ package com.epam.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import com.epam.dao.ExchangeTicketDAO;
 import com.epam.exception.ElementNotFoundException;
 import com.epam.model.ExchangeTicket;
 
+@Repository
 public class ExchangeTicketService {
 
-	private static final ExchangeTicketDAO dao = new ExchangeTicketDAO();
-
+	@Autowired
+	private ExchangeTicketDAO dao ;
+	
 	public List<ExchangeTicket> getExchangeTickets() throws Exception {
 		return dao.getAll();
 	}

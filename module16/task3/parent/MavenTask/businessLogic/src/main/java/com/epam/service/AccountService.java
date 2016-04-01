@@ -1,10 +1,10 @@
 package com.epam.service;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Repository;
 
 import com.epam.dao.AccountDAO;
@@ -13,6 +13,7 @@ import com.epam.model.Account;
 import com.epam.model.Person;
 
 @Repository
+@Configuration
 public class AccountService {
 
 	@Autowired

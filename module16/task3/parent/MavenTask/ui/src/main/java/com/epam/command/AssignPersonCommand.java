@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
+import org.springframework.web.context.WebApplicationContext;
 
 import com.epam.model.Account;
 import com.epam.model.Person;
@@ -13,7 +14,13 @@ import com.epam.service.PersonService;
 public class AssignPersonCommand implements Command {
 
 	private static final Logger log = Logger.getLogger(AssignPersonCommand.class);
+	private AccountService accountService;
+	private PersonService personService;
 	
+	public AssignPersonCommand(WebApplicationContext context) {
+		personService = context.getBean(PersonService.class);
+		accountService =  context.getBean(AccountService.class);
+	}
 	@Override
 	public String execute(HttpServletRequest request,
 			HttpServletResponse response) {
@@ -21,8 +28,6 @@ public class AssignPersonCommand implements Command {
 		String result = "/main.jsp";
 		String passport = request.getParameter("person");
 		int accountID = Integer.parseInt(request.getParameter("account"));
-		AccountService accountService = new AccountService();
-		PersonService personService = new PersonService();
 		try {
 			Person person = personService.searchPerson(passport);
 			Account account = accountService.searchAccount(accountID);
