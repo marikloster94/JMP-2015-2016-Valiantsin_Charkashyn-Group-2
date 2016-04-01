@@ -23,7 +23,7 @@ public class Account {
 	private String endDate;
 	private double value;
 	private Currency curr = new Currency();
-	private Person person =  new Person();
+	private Person man =  new Person();
 
 	@Id
 	@GeneratedValue
@@ -69,12 +69,12 @@ public class Account {
 	}
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "idPerson", nullable = false)
-	public Person getPerson() {
-		return person;
+	public Person getMan() {
+		return man;
 	}
 
-	public void setPerson(Person person) {
-		this.person = person;
+	public void setMan(Person person) {
+		this.man = person;
 	}
 	@Column(name="value")
 	public double getValue() {

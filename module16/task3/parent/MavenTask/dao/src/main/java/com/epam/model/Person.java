@@ -16,7 +16,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="person")
+@Table(name="people")
 @Access(AccessType.PROPERTY)
 public class Person {
 
@@ -79,7 +79,7 @@ public class Person {
 		this.passportNumber = passportNumber;
 	}
 	
-	@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "person")
+	@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "man")
 	@PrimaryKeyJoinColumn
 	public List<Account> getAccounts() {
 		return accounts;

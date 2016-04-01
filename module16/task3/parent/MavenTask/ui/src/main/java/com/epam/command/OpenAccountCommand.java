@@ -51,7 +51,7 @@ public class OpenAccountCommand implements Command {
 			request.setAttribute("error", "There is not client with passport number "+passport+". You should create new person");
 			return "/error";
 		}
-		acc.setPerson(person);
+		acc.setMan(person);
 		Currency curr = null;
 		try {
 			curr = currService.searchCurrency(currency);

@@ -36,7 +36,7 @@ public class AccountService {
 			throw new ElementNotFoundException(
 					"You can't assign nonexistent person to account");
 		}
-		account.setPerson(person);
+		account.setMan(person);
 		updateAccount(account);
 	}
 
@@ -53,7 +53,7 @@ public class AccountService {
 		List<Account> accounts = getAccounts();
 		List<Account> filtredAccounts = new ArrayList<Account>();
 		for (Account account : accounts) {
-			if (account.getPerson().getPassportNumber().equals(passportNumber)
+			if (account.getMan().getPassportNumber().equals(passportNumber)
 					&& (account.getCurr().getShortName()
 							.equals(currencies.get(0)) || account.getCurr()
 							.getShortName().equals(currencies.get(0)))) {
@@ -67,7 +67,7 @@ public class AccountService {
 			throws Exception {
 		List<Account> accounts = getAccounts();
 		for (Account account : accounts) {
-			if (account.getPerson().getPassportNumber().equals(passportNumber)
+			if (account.getMan().getPassportNumber().equals(passportNumber)
 					&& account.getCurr().getShortName().equals(currency)) {
 				return account;
 			}
