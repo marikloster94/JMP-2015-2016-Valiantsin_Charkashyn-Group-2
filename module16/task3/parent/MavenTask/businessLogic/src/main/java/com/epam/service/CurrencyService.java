@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.epam.dao.CurrencyDAO;
 import com.epam.exception.AddNewElementException;
 import com.epam.model.Currency;
+import com.epam.model.Person;
 
 @Repository
 public class CurrencyService {
@@ -23,7 +24,12 @@ public class CurrencyService {
 	}
 
 	public void addCurrency(Currency currency) throws Exception {
-		Currency foundCurrency = searchCurrency(currency.getShortName());
+		Currency foundCurrency = null;
+		try {
+			foundCurrency = searchCurrency(currency.getShortName());
+		} catch (Exception e) {
+
+		}
 		if (foundCurrency == null) {
 			dao.create(currency);
 		} else {
