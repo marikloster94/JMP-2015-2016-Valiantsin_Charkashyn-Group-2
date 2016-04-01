@@ -1,7 +1,5 @@
 package com.epam.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
@@ -17,26 +15,24 @@ import javax.persistence.Table;
 @Entity
 @Table(name="account")
 @Access(AccessType.PROPERTY)
-public class Account implements Serializable {
+public class Account {
 
-	private static final long serialVersionUID = 4117534837435126228L;
-
-	private int id;
+	private int idAccount;
 	private String description;
 	private String startDate;
 	private String endDate;
 	private double value;
-	private Currency curr;
-	private Person person;
+	private Currency curr = new Currency();
+	private Person person =  new Person();
 
 	@Id
 	@GeneratedValue
 	public int getId() {
-		return id;
+		return idAccount;
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.idAccount = id;
 	}
 	@Column(name="description")
 	public String getDescription() {
@@ -87,61 +83,6 @@ public class Account implements Serializable {
 
 	public void setValue(double value) {
 		this.value = value;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((curr == null) ? 0 : curr.hashCode());
-		result = prime * result
-				+ ((description == null) ? 0 : description.hashCode());
-		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
-		result = prime * result + id;
-		result = prime * result + ((person == null) ? 0 : person.hashCode());
-		result = prime * result
-				+ ((startDate == null) ? 0 : startDate.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Account other = (Account) obj;
-		if (curr == null) {
-			if (other.curr != null)
-				return false;
-		} else if (!curr.equals(other.curr))
-			return false;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
-			return false;
-		if (endDate == null) {
-			if (other.endDate != null)
-				return false;
-		} else if (!endDate.equals(other.endDate))
-			return false;
-		if (id != other.id)
-			return false;
-		if (person == null) {
-			if (other.person != null)
-				return false;
-		} else if (!person.equals(other.person))
-			return false;
-		if (startDate == null) {
-			if (other.startDate != null)
-				return false;
-		} else if (!startDate.equals(other.startDate))
-			return false;
-		
-		return true;
 	}
 
 }

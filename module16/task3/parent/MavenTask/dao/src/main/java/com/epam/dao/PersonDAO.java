@@ -8,7 +8,6 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Component;
 
-import com.epam.exception.HsqlDBException;
 import com.epam.model.Person;
 
 @Component
@@ -21,12 +20,7 @@ public class PersonDAO {
 		if (person == null) {
 			throw new IllegalArgumentException("Person can not be null");
 		}
-		try {
-			person = em.merge(person);
-		} catch (Exception ex) {
-			throw new HsqlDBException("Cannot add person to db", ex);
-		}
-		return person;
+		return em.merge(person);
 
 	}
 

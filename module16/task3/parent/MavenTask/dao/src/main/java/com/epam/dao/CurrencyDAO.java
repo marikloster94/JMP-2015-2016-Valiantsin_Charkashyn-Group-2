@@ -20,12 +20,7 @@ public class CurrencyDAO  {
 		if (currency == null) {
 			throw new IllegalArgumentException("Currency can not be null");
 		}
-		try {
-			currency = em.merge(currency);
-		} catch (Exception ex) {
-			throw new HsqlDBException("Can not add currency to db", ex);
-		}
-		return currency;
+		return em.merge(currency);
 	}
 
 	public Currency get(int id) throws Exception {

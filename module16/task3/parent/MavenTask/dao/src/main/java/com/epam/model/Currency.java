@@ -1,6 +1,5 @@
 package com.epam.model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,9 +17,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="currency")
 @Access(AccessType.PROPERTY)
-public class Currency implements Serializable {
-
-	private static final long serialVersionUID = 2740605093953453202L;
+public class Currency {
 
 	private int idCurrency;
 	private String shortName;
@@ -51,34 +48,6 @@ public class Currency implements Serializable {
 	public void setAccounts(List<Account> accounts) {
 		this.accounts = accounts;
 	}
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + idCurrency;
-		result = prime * result
-				+ ((shortName == null) ? 0 : shortName.hashCode());
-		return result;
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Currency other = (Currency) obj;
-		if (idCurrency != other.idCurrency)
-			return false;
-		if (shortName == null) {
-			if (other.shortName != null)
-				return false;
-		} else if (!shortName.equals(other.shortName))
-			return false;
-		return true;
-	}
-	
 	
 	
 }

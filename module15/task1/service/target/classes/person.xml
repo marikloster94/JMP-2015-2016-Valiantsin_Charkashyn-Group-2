@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<persons>
+    <person>
+        <dateOfBirth>12/03/1985</dateOfBirth>
+        <name>Петр</name>
+        <surname>Федоров</surname>
+        <login>petr</login>
+        <email>petr.fedorov@mail.ru</email>
+    </person>
+    <person>
+        <dateOfBirth>12/03/1990</dateOfBirth>
+        <name>Иван</name>
+        <surname>Петров</surname>
+        <login>ivan</login>
+        <email>ivan.petrov@mail.ru</email>
+    </person>
+    <person>
+        <dateOfBirth>12/05/1970</dateOfBirth>
+        <name>Виктор</name>
+        <surname>Назаров</surname>
+        <login>nazar</login>
+        <email>nazar@mail.ru</email>
+    </person>
+    <person>
+        <dateOfBirth>17/02/1994</dateOfBirth>
+        <name>Мария</name>
+        <surname>Клостер</surname>
+        <login>mari.kloster</login>
+        <email>mari.kloster@mail.ru</email>
+    </person>
+    <person>
+        <dateOfBirth>23/03/1995</dateOfBirth>
+        <name>Ольга</name>
+        <surname>Тереня</surname>
+        <login>terenya</login>
+        <email>terenya@mail.ru</email>
+    </person>
+</persons>

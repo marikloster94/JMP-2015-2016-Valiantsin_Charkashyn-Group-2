@@ -25,11 +25,11 @@ public class PersonService {
 
 	public Person addPerson(Person searchPerson) throws Exception {
 		Person person = null;
-		try{
-			person = searchPerson(searchPerson.getPassportNumber());
-		} catch(Exception e){
-			
-		}
+//		try{
+//			person = searchPerson(searchPerson.getPassportNumber());
+//		} catch(Exception e){
+//			
+//		}
 		if (person == null) {
 			person = dao.create(searchPerson);
 		} else {
