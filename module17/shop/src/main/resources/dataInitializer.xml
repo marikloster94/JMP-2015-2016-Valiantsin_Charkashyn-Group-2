@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+						http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+<bean id="sellerNames" class="java.util.HashMap">
+    <constructor-arg>
+        <map key-type="java.lang.Long" value-type="java.lang.String">
+            <entry key="1">
+            	<util:constant static-field="org.shop.common.Sellers.AMAZON"/>
+            </entry>
+            <entry key="2">
+            	<util:constant static-field="org.shop.common.Sellers.SAMSUNG"/>
+            </entry>
+            <entry key="3" value="Apple"/>
+        </map>
+    </constructor-arg>
+</bean>
+
+<bean name="productInitializer" class="org.shop.ProductInitializer">
+	<constructor-arg ref="productServiceImpl"/>
+</bean>
+
+<bean name="proposalInitializer" class="org.shop.ProposalInitializer" autowire="byName">
+	<property name="productService" ref="productServiceImpl"/>
+	<property name="proposalService" ref="proposalServiceImpl"/>
+	<property name="sellerService" ref="sellerServiceImpl"/>
+</bean>
+
+<bean name="sellerInitializer" class="org.shop.SellerInitializer">
+	<constructor-arg ref="sellerNames"/>
+	<property name="sellerService" ref="sellerServiceImpl"/>
+</bean>
+
+<bean name="userInitializer" class="org.shop.UserInitializer">
+	<constructor-arg ref="userServiceImpl"/>
+</bean>
+
+<bean name="dataInitializer" class="org.shop.DataInitializer" init-method="initData">
+	<property name="userInitializer" ref="userInitializer"/>
+	<property name="sellerInitializer" ref="sellerInitializer"/>
+	<property name="proposalInitializer" ref="proposalInitializer"/>
+	<property name="productInitializer" ref="productInitializer"/>
+</bean>
+
+
+</beans>
