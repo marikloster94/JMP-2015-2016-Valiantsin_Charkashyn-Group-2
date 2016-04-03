@@ -28,7 +28,7 @@ public class ExchangeRate  {
 	public void setId(int id) {
 		this.idRate = id;
 	}
-	@Column(name="from")
+	@Column(name="fromCurr")
 	public String getFrom() {
 		return from;
 	}
@@ -36,7 +36,7 @@ public class ExchangeRate  {
 	public void setFrom(String from) {
 		this.from = from;
 	}
-	@Column(name="to")
+	@Column(name="toCurr")
 	public String getTo() {
 		return to;
 	}
@@ -44,7 +44,7 @@ public class ExchangeRate  {
 	public void setTo(String to) {
 		this.to = to;
 	}
-	@Column(name="rate")
+	@Column(name="currRate")
 	public double getRate() {
 		return rate;
 	}

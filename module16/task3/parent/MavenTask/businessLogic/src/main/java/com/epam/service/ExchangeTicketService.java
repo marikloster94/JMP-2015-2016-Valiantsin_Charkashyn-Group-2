@@ -3,6 +3,8 @@ package com.epam.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -19,7 +21,8 @@ public class ExchangeTicketService {
 	public List<ExchangeTicket> getExchangeTickets() throws Exception {
 		return dao.getAll();
 	}
-
+	
+	@Transactional
 	public void addTicket(ExchangeTicket ticket) throws Exception {
 		dao.create(ticket);
 	}
@@ -27,7 +30,8 @@ public class ExchangeTicketService {
 	public List<ExchangeTicket> getExchangeTickets(String status) throws Exception {
 		return dao.getAll(status);
 	}
-
+	
+	@Transactional
 	public void updateExchangeTicket(ExchangeTicket ticket) throws Exception, ElementNotFoundException {
 		ExchangeTicket oldTicket = searchExchangeTicket(ticket.getId());
 		if (oldTicket != null) {

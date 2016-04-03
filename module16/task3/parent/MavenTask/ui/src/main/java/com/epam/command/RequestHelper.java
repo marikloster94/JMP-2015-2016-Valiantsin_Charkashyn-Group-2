@@ -24,6 +24,7 @@ public class RequestHelper {
 		commands.put("searchAccount", new SearchAccountCommand(context));
 		commands.put("showAccounts", new ShowAccountsCommand(context));
 		commands.put("showClients", new ShowClientsCommand(context) );
+		commands.put("addExchangeRate", new AddExchangeRateCommand(context));
 	}
 	
 	public Command getCommand(String command){

@@ -6,11 +6,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.epam.dao.RateDAO;
 import com.epam.exception.ExchangeException;
+import com.epam.exception.HsqlDBException;
 import com.epam.model.Account;
 import com.epam.model.ExchangeRate;
 import com.epam.model.ExchangeTicket;
@@ -20,6 +23,14 @@ public class ExchangeService {
 
 	@Autowired
 	private RateDAO dao ;	
+	
+	@Transactional
+	public ExchangeRate create(ExchangeRate rate) throws HsqlDBException{
+		if(rate != null){
+			rate = dao.create(rate);
+		}
+		return rate;
+	}
 	
 	public synchronized List<ExchangeRate> getExchangeRates() throws Exception {
 			return dao.getAll();

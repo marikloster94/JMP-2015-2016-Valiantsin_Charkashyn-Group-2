@@ -21,7 +21,9 @@ public class RateDAO{
 		if (rate == null) {
 			throw new IllegalArgumentException("ExchangeRate can not be null");
 		}
-		return em.merge(rate);
+		em.persist(rate);
+		em.flush();
+		return rate;
 	}
 
 	public ExchangeRate get(int id) throws SQLException {
@@ -29,7 +31,7 @@ public class RateDAO{
 	}
 	
 	public List<ExchangeRate> getAll() throws SQLException{
-		return em.createQuery("SELECT r FRON ExchangeRate r").getResultList();
+		return em.createQuery("SELECT r FROM ExchangeRate r").getResultList();
 	}
 
 }

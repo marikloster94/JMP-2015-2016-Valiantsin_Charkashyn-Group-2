@@ -17,6 +17,9 @@
 		<li><p><b><a href="addCurrency.jsp" title="">Add currency</a></b></p></li>
 	</ul>
 	<ul>
+		<li><p><b><a href="ModuleUI?command=addExchangeRate" title="">Add exchange rate</a></b></p></li>
+	</ul>
+	<ul>
 		<li><p><b><a href="searchPerson.jsp" title="">Search person</a></b></p></li>
 	</ul>
 	<ul>

@@ -2,13 +2,14 @@ package com.epam.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.epam.dao.CurrencyDAO;
 import com.epam.exception.AddNewElementException;
 import com.epam.model.Currency;
-import com.epam.model.Person;
 
 @Repository
 public class CurrencyService {
@@ -23,6 +24,7 @@ public class CurrencyService {
 		return dao.get(currency);
 	}
 
+	@Transactional
 	public void addCurrency(Currency currency) throws Exception {
 		Currency foundCurrency = null;
 		try {

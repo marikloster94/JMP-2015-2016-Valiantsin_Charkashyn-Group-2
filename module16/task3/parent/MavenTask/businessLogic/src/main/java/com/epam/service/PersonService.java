@@ -2,6 +2,8 @@ package com.epam.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -22,14 +24,15 @@ public class PersonService {
 	public Person searchPerson(String passportNumber) throws Exception {
 		return (Person) dao.get(passportNumber);
 	}
-
+	
+	@Transactional
 	public Person addPerson(Person searchPerson) throws Exception {
 		Person person = null;
-//		try{
-//			person = searchPerson(searchPerson.getPassportNumber());
-//		} catch(Exception e){
-//			
-//		}
+		try{
+			person = searchPerson(searchPerson.getPassportNumber());
+		} catch(Exception e){
+			
+		}
 		if (person == null) {
 			person = dao.create(searchPerson);
 		} else {

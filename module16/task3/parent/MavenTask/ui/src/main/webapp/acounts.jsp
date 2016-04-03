@@ -13,7 +13,7 @@
       <p><b>Start date:</b> <c:out value="${account.startDate}"/></p>
       <p><b>End date:</b><c:out value="${account.endDate}"/></p>
       <p><b>Money:</b><c:out value="${account.value}"/> <c:out value="${account.curr.shortName}"/></p>
-      <p><b>Client:</b><c:out value="${account.person.name}"/> <c:out value="${account.person.surname}"/></p>
+      <p><b>Client:</b><c:out value="${account.man.name}"/> <c:out value="${account.man.surname}"/></p>
 <br/>
 </c:forEach>
 <a href="main.jsp" title="">Return to main page</a>

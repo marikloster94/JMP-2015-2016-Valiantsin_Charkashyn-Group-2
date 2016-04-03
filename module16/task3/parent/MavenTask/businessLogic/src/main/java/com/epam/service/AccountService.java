@@ -3,6 +3,8 @@ package com.epam.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Repository;
@@ -23,10 +25,11 @@ public class AccountService {
 		return dao.getAll();
 	}
 
+	@Transactional
 	public Account addAccount(Account acc) throws Exception {
 		return dao.create(acc);
 	}
-
+	@Transactional
 	public void assignPerson(Person person, Account account) throws Exception {
 		if (account == null) {
 			throw new ElementNotFoundException(
@@ -43,7 +46,7 @@ public class AccountService {
 	public Account searchAccount(int id) throws Exception {
 		return (Account) dao.get(id);
 	}
-
+	@Transactional
 	public Account updateAccount(Account account) throws Exception {
 		return dao.update(account);
 	}

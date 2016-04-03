@@ -64,7 +64,7 @@ public class ExchangeTicket {
 	public void setToCurrAmount(double toCurrAmount) {
 		this.toCurrAmount = toCurrAmount;
 	}
-	@Column(name="status")
+	@Column(name="exchangeStatus")
 	public String getStatus() {
 		return status;
 	}
