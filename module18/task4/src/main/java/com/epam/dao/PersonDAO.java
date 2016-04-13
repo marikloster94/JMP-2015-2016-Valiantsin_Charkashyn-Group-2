@@ -22,7 +22,11 @@ public class PersonDAO {
 		return em.merge(person);
 	}
 	
-	public List<Person> getAll() throws Exception{
+	public List<Person> getAll() throws Exception {
 		return em.createQuery("SELECT p from Person p").getResultList();
+	}
+	
+	public Person get(int id) throws Exception {
+		return em.find(Person.class, id);
 	}
 }

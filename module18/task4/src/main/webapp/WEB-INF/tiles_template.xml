@@ -10,43 +10,24 @@
     <put-attribute name="body" value="/main.jsp"/>
 </definition>
 
-<definition name="accounts" extends="index">
-     <put-attribute name="body" value="/layouts/accounts.jsp"></put-attribute>
-</definition>
-
-<definition name="addAccount" extends="index">
-     <put-attribute name="body" value="/layouts/addAccount.jsp"></put-attribute>
-</definition>
-
 <definition name="newPerson" extends="index">
      <put-attribute name="body" value="/layouts/addClient.jsp"></put-attribute>
 </definition>
 
-<definition name="newCurrency" extends="index">
-     <put-attribute name="body" value="/layouts/addCurrency.jsp"></put-attribute>
-</definition>
-
-<definition name="assignPerson" extends="index">
-     <put-attribute name="body" value="/layouts/assignPerson.jsp"></put-attribute>
-</definition>
-
-<definition name="clients" extends="index">
-     <put-attribute name="body" value="/layouts/clients.jsp"></put-attribute>
+<definition name="newBooking" extends="index">
+     <put-attribute name="body" value="/layouts/addBooking.jsp"></put-attribute>
 </definition>
 
 <definition name="error" extends="index">
      <put-attribute name="body" value="/layouts/error.jsp"></put-attribute>
 </definition>
 
-<definition name="exchangeTicket" extends="index">
-     <put-attribute name="body" value="/layouts/exchangeTicket.jsp"></put-attribute>
+
+<definition name="searchBooking" extends="index">
+     <put-attribute name="body" value="/layouts/searchBooking.jsp"></put-attribute>
 </definition>
 
-<definition name="searchAccount" extends="index">
-     <put-attribute name="body" value="/layouts/searchAccount.jsp"></put-attribute>
-</definition>
-
-<definition name="searchPerson" extends="index">
-     <put-attribute name="body" value="/layouts/searchPerson.jsp"></put-attribute>
+<definition name="deleteBooking" extends="index">
+     <put-attribute name="body" value="/layouts/deleteBooking.jsp"></put-attribute>
 </definition>
 </tiles-definitions>

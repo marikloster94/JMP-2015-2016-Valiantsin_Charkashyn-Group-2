@@ -22,7 +22,11 @@ public class PersonService {
 		return dao.add(searchPerson);
 	}
 	
-	public List<Person> getAll() throws Exception{
+	public List<Person> getAll() throws Exception {
 		return dao.getAll();
+	}
+	
+	public Person get(int id) throws Exception {
+		return dao.get(id);
 	}
 }
