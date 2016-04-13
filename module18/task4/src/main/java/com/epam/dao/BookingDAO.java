@@ -16,6 +16,7 @@ public class BookingDAO {
 	private EntityManager em;
 	
 	public static final String GET_BOOKING_BY_BOKKINGNUMBER = "SELECT b FROM Booking b WHERE b.bookingNumber=:bookingNumber";
+	public static final String GET_ALL = "SELECT b FROM Booking b";
 	
 	public Booking add(Booking booking) throws Exception {
 		if (booking == null) {
@@ -39,6 +40,5 @@ public class BookingDAO {
 	public List<Booking> getBookings(String query) throws Exception {
 		return em.createQuery(query).getResultList();
 	}
-	
 	
 }

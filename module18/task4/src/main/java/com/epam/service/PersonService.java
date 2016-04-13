@@ -16,6 +16,7 @@ public class PersonService {
 	@Autowired
 	PersonDAO dao;
 	
+	
 	@Transactional
 	public Person addPerson(Person searchPerson) throws Exception {
 		return dao.add(searchPerson);
