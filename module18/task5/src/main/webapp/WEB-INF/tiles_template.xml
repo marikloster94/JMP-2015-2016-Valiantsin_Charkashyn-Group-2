@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+<definition name="index" template="/template.jsp">
+    <put-attribute name="menu" value="/tiles/menu.jsp" />
+    <put-attribute name="body" value="/main.jsp"/>
+</definition>
+
+<definition name="newPerson" extends="index">
+     <put-attribute name="body" value="/layouts/addClient.jsp"></put-attribute>
+</definition>
+
+<definition name="updatePerson" extends="index">
+     <put-attribute name="body" value="/layouts/updatePerson.jsp"></put-attribute>
+</definition>
+
+<definition name="newBooking" extends="index">
+     <put-attribute name="body" value="/layouts/addBooking.jsp"></put-attribute>
+</definition>
+
+<definition name="error" extends="index">
+     <put-attribute name="body" value="/layouts/error.jsp"></put-attribute>
+</definition>
+
+
+<definition name="searchBooking" extends="index">
+     <put-attribute name="body" value="/layouts/searchBooking.jsp"></put-attribute>
+</definition>
+
+<definition name="deleteBooking" extends="index">
+     <put-attribute name="body" value="/layouts/deleteBooking.jsp"></put-attribute>
+</definition>
+
+<definition name="searchShowTime" extends="index">
+     <put-attribute name="body" value="/layouts/showTimeOnDate.jsp"></put-attribute>
+</definition>
+</tiles-definitions>
