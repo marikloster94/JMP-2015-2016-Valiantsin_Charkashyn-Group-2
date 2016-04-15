@@ -86,7 +86,7 @@ public class BookingController {
 		return result;
 	}
 	
-	@RequestMapping(value = "/delete" , method = RequestMethod.DELETE)
+	@RequestMapping(value = "/delete" , method = RequestMethod.POST)
 	public String deleteBooking(@ModelAttribute("booking") int bookingId, Model model){
 		String result = "index";
 		try {
