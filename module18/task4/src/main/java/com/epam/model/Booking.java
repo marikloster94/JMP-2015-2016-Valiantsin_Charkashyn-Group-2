@@ -24,6 +24,7 @@ public class Booking {
 	private int idBooking;
 	private String bookingNumber;
 	private Date bookingDate;
+	private String movie;
 	private int place;
 	private double price;
 	private Person client;
@@ -81,6 +82,14 @@ public class Booking {
 
 	public void setClient(Person client) {
 		this.client = client;
+	}
+
+	public String getMovie() {
+		return movie;
+	}
+	@Column(name="movie")
+	public void setMovie(String movie) {
+		this.movie = movie;
 	}
 
 }

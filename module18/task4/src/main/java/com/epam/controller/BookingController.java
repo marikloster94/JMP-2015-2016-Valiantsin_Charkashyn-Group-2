@@ -1,12 +1,16 @@
 package com.epam.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -47,11 +51,14 @@ public class BookingController {
 	}
 	
 	@RequestMapping(value = "/addBooking" , method = RequestMethod.POST)
-	public String addBooking(@ModelAttribute("booking") Booking booking, @ModelAttribute("person") int idPerson,Model model){
+	public String addBooking(@ModelAttribute("booking") Booking booking, @ModelAttribute("date") String date, @ModelAttribute("person") int idPerson,Model model){
 		String result = "index";
+		System.out.println(date);
 		try {
+			Date bookingDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm").parse(date);
 			Person person = personService.get(idPerson);
 			booking.setClient(person);
+			booking.setBookingDate(bookingDate);
 			service.add(booking);
 		} catch (Exception e) {
 			log.error(Booking.class, e);
@@ -92,6 +99,12 @@ public class BookingController {
 		return result;
 	}
 	
+	@RequestMapping(value="/getBookingByNumber", method = RequestMethod.GET)
+	public String searchBooking(Model model){
+		return "searchBooking";
+	}
+	
+	
 	@RequestMapping(value="/getBooking", method = RequestMethod.POST)
 	public ModelAndView getBooking(@ModelAttribute("bookingNumber") String bookingNumber, ModelAndView model){
 		String result = "searchBooking";
@@ -109,6 +122,11 @@ public class BookingController {
 		}
 		model.setViewName(result);
 		return model;
+	}
+	
+	@RequestMapping(value = "/getShowTime", method=RequestMethod.GET)
+	public String getShowTime(Model model){
+		return "searchShowTime";
 	}
 	
 	

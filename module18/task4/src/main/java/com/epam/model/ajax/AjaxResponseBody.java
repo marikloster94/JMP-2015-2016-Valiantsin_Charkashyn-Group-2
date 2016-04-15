@@ -2,9 +2,8 @@ package com.epam.model.ajax;
 
 import java.util.List;
 
-import org.hsqldb.rights.User;
-
 import com.epam.model.Booking;
+import com.epam.model.ShowTime;
 import com.fasterxml.jackson.annotation.JsonView;
 
 public class AjaxResponseBody {
@@ -16,7 +15,7 @@ public class AjaxResponseBody {
 	private String code;
 
 	@JsonView(Views.Public.class)
-	private List<Booking> result;
+	private List<ShowTime> result;
 
 	public String getMsg() {
 		return msg;
@@ -34,11 +33,11 @@ public class AjaxResponseBody {
 		this.code = code;
 	}
 
-	public List<Booking> getResult() {
+	public List<ShowTime> getResult() {
 		return result;
 	}
 
-	public void setResult(List<Booking> result) {
+	public void setResult(List<ShowTime> result) {
 		this.result = result;
 	}
 

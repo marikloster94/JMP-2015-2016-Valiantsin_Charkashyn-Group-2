@@ -1,5 +1,6 @@
 package com.epam.service;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -20,8 +21,8 @@ public class BookingService {
 	private static final Logger log = Logger.getLogger(BookingService.class);
 	
 	@Transactional
-	public Booking add(Booking booking){
-		return null;
+	public Booking add(Booking booking) throws Exception{
+		return dao.add(booking);
 	}
 	
 	@Transactional
@@ -39,7 +40,7 @@ public class BookingService {
 	}
 	
 	public Booking get(String bookingNumber) throws Exception{
-		if(bookingNumber == null ||bookingNumber.isEmpty()){
+		if(bookingNumber == null || bookingNumber.isEmpty()){
 			throw new Exception("Empty bookingNumber");
 		}
 		return dao.get(bookingNumber);
@@ -53,7 +54,7 @@ public class BookingService {
 		return dao.getBookings(BookingDAO.GET_ALL);
 	}
 	
-	public List<Booking> getByQuery(String query) throws Exception{
-		return dao.getBookings(query);
+	public List<Booking> get(Date date) throws Exception{
+		return dao.getBookings(date);
 	}
 }

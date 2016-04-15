@@ -23,7 +23,7 @@
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
-	<!--
+
 	<bean id="tilesConfigurer"
 		class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
 		<property name="definitions">
@@ -41,5 +41,5 @@
 		</property>
 		<property name="order" value="0"/>
 	</bean>
-	-->
+
 </beans>

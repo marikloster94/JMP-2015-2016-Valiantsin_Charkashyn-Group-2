@@ -11,11 +11,13 @@
 	<br /> 
 	Enter booking number: <input required type="text" name="bookingNumber" pattern="[A-Z]{3}[0-9]{7}"/>
 	<br/><br/>
-	Enter bookingDate: <input required type="date"  name="bookingDate" />
+	Enter bookingDate: <input required type="datetime-local"  name="date" />
 	<br />	<br />
-	Enter place: <input required type="number"  name="place" /> 
+	Enter place: <input required type="number"  name="place" max="15"/> 
 	<br />	<br/>
 	Enter price: <input required type="number" step="any" name="price" />
+	<br/> <br />
+	Enter movie: <input required type="text" name="movie" />
 	<br/> <br />
 	 <input type="submit" value=Add />
 </form>

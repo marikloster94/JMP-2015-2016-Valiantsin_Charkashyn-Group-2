@@ -30,4 +30,8 @@
 <definition name="deleteBooking" extends="index">
      <put-attribute name="body" value="/layouts/deleteBooking.jsp"></put-attribute>
 </definition>
+
+<definition name="searchShowTime" extends="index">
+     <put-attribute name="body" value="/layouts/showTimeOnDate.jsp"></put-attribute>
+</definition>
 </tiles-definitions>
